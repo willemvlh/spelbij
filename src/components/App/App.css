@@ -1,0 +1,37 @@
+div#hive{
+  display: flex;
+  height: 50%;
+  flex-wrap: wrap;
+}
+
+div.cell.middle{
+  background: gold;
+}
+
+div.cell{
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  border: solid 1px #ddd;
+  width: calc(100%/3.1);
+  align-items: center;
+  margin: 1px;
+}
+
+div#container{
+  font-size: 3rem;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  width: 400px;
+  height: 800px;
+  margin: 50px auto 0px auto;
+}
+
+div#input input{
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  border: none;
+}
