@@ -22,7 +22,7 @@ const Shortcuts = (props) => {
         }
     }
 
-    return <div id="keyboard" onClick={e => console.log("hello")} onKeyDown={e => onKeyPress(e)} tabIndex={0}>
+    return <div id="keyboard" onKeyDown={e => onKeyPress(e)} tabIndex={0}>
         {props.children}
     </div>
 }
