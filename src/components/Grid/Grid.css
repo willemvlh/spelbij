@@ -1,5 +1,23 @@
+div#hive{
+	font-size: 3rem;
+	text-transform: uppercase;
+	text-align: center;
+}
+
 div.buttons {
 	display: flex;
 	font-size: 2rem;
 	justify-content: space-between;
+}
+
+div.buttons div {
+	border: solid 1px;
+	flex: 1
+}
+
+div#foundWords ul {
+	text-align: left;
+	list-style: none inside none;
+	margin: 0;
+	padding: 0;
 }

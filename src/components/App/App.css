@@ -4,6 +4,23 @@ div#hive{
   flex-wrap: wrap;
 }
 
+div#input{
+  height: 2.6rem;
+  font-size: 2.6rem;
+  margin-top: 15px;
+}
+
+div#top{
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem
+}
+
+div#meta{
+  display:flex;
+  justify-content: space-between;
+}
+
 div.cell.middle{
   background: gold;
 }
@@ -19,13 +36,14 @@ div.cell{
 }
 
 div#container{
-  font-size: 3rem;
   font-family: sans-serif;
   text-transform: uppercase;
   text-align: center;
   width: 400px;
   height: 800px;
   margin: 50px auto 0px auto;
+  display: flex;
+  flex-direction: column;
 }
 
 div#input input{

@@ -16,7 +16,6 @@ export interface ResetWordAction extends Action {
 
 export interface SubmitWordAction extends Action {
     type: "submitWord",
-    payload: string
 }
 
 export interface ShuffleAction extends Action {
