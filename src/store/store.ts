@@ -1,11 +1,16 @@
-import { configureStore, Reducer } from '@reduxjs/toolkit'
+import {configureStore, Reducer, applyMiddleware} from '@reduxjs/toolkit'
+import logger from "redux-logger";
 import { WordAction, WordState } from './types';
 import {shuffle, debounce} from "lodash"
+import {log} from "../Utils"
 
 const words = ["bede", "bedeesd", "berd", "berde", "beroepscode", "beroepseed", "beroepsorde", "beroerd", "beweerd", "bobbed", "bode", "bodes", "boede", "boerde", "bood", "boord", "bord", "border", "bordes", "bosbode", "breed", "breedspoor", "brod", "broed", "broeder", "broederorde", "broedproces", "broeds", "brood", "brooddoos", "broodoproer", "ceder", "code", "codec", "codeerder", "codewoord", "credo", "decoder", "decor", "deed", "derde", "dobbe", "dobber", "dode", "doder", "dodo", "does", "dood", "doodop", "doods", "doodsbed", "doop", "door", "doorboord", "doorreed", "doos", "dope", "doper", "dopers", "dopper", "dorp", "dorper", "dorps", "dors", "dorser", "dresscode", "droes", "droop", "drop", "drops", "dweper", "eerder", "eerredder", "erdoor", "erecode", "ereorde", "erewoord", "esdorp", "oord", "oordop", "opbod", "orde", "ordebroeder", "order", "orderproces", "ordewoord", "pede", "pedo", "peerdrops", "persbrood", "poeder", "poederdoos", "poepdoos", "poeperd", "porder", "procesorde", "record", "recorder", "recordscore", "redder", "rede", "reder", "redres", "reed", "reeds", "robbedoes", "rode", "rodeo", "roede", "roerder", "rood", "scorebord", "seder", "soepbord", "speed", "spoed", "wedde", "wedder", "wede", "weder", "wederdoop", "wederdoper", "wederdopers", "wederwoord", "weed", "weercode", "weerwoord", "werd", "woede", "woerd", "woord", "woordorde", "wordprocessor", "wreed"]
 
 const getStateFromStorage : (() => WordState | null) = () => {
     let storeAsString = localStorage.getItem("state");
+    if(storeAsString){
+        log("Retrieved state from store");
+    }
     return JSON.parse(storeAsString ?? "null")
 }
 
@@ -20,8 +25,8 @@ const initialState: WordState = {
 
 const initialOrSavedState = getStateFromStorage() || initialState;
 
-const reducer: Reducer<WordState, WordAction> = (state = initialOrSavedState, action) => {
 
+const reducer: Reducer<WordState, WordAction> = (state = initialOrSavedState, action) => {
     switch (action.type) {
         case "removeLetter":
             return { ...state, currentWord: state.currentWord.substring(0, state.currentWord.length - 1) }
@@ -51,11 +56,13 @@ const reducer: Reducer<WordState, WordAction> = (state = initialOrSavedState, ac
         case "shuffle":
             return {...state, edgeLetters: shuffle(state.edgeLetters)}
         default:
-            return initialState
+            return state
     }
 }
 
-const store = configureStore({ reducer: reducer,  });
+const store = configureStore({ reducer: reducer, middleware: [logger] });
 const saveState = debounce(() => localStorage.setItem("state", JSON.stringify(store.getState())), 1000);
+
 store.subscribe(() => saveState())
+
 export default store;
