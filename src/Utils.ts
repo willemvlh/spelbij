@@ -3,7 +3,7 @@ import process from "process"
 
 export const log = (info: any) => console.debug(info)
 
-const backendUrl = process.env.LAMBDA
+const backendUrl = process.env.REACT_APP_LAMBDA
 
 export const fetchGame: (() => Promise<InitialState>) = () => {
     if(!backendUrl){
