@@ -1,5 +1,4 @@
 import {GameState, InitialState} from "./store/Types";
-import process from "process"
 
 export const log = (info: any) => console.debug(info)
 
