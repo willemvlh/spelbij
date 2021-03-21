@@ -1,10 +1,14 @@
 import {GameState, InitialState} from "./store/Types";
+import process from "process"
 
 export const log = (info: any) => console.debug(info)
 
-const backendUrl = "http://116.203.204.82:8080/game"
+const backendUrl = process.env.LAMBDA
 
 export const fetchGame: (() => Promise<InitialState>) = () => {
+    if(!backendUrl){
+        throw new Error("Backend url must not be empty - please set LAMBDA env var")
+    }
     return fetch(backendUrl)
         .then(r => r.json())
         .then(game => game)
