@@ -2,7 +2,7 @@ import {GameState, InitialState} from "./store/Types";
 
 export const log = (info: any) => console.debug(info)
 
-const backendUrl = "http://localhost:8080/game"
+const backendUrl = "http://116.203.204.82:8080/game"
 
 export const fetchGame: (() => Promise<InitialState>) = () => {
     return fetch(backendUrl)
