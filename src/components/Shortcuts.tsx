@@ -1,7 +1,7 @@
 import React from "react";
 
 import { connect } from "react-redux"
-import {AddLetterAction, RemoveLetterAction, SubmitWordAction} from "../store/types"
+import {AddLetterAction, RemoveLetterAction, SubmitWordAction} from "../store/Types"
 
 const mapDispatchToProps = (dispatch: ((action: AddLetterAction | RemoveLetterAction | SubmitWordAction) => any)) => {
     return {

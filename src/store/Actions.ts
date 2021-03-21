@@ -1,4 +1,4 @@
-import {AddLetterAction, RemoveLetterAction, ResetWordAction, ShuffleAction, SubmitWordAction, WordAction} from "./types"
+import {AddLetterAction, RemoveLetterAction, ResetWordAction, ShuffleAction, SubmitWordAction} from "./Types"
 
 export const addLetter:((letter: string) => AddLetterAction) = letter => {
     return {type: "addLetter", payload: letter}

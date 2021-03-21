@@ -1,10 +1,5 @@
 import { connect } from "react-redux"
-import { AddLetterAction } from "../../store/types"
-
-type Letter = {
-    letter: string,
-    isMiddle?: boolean
-}
+import { AddLetterAction } from "../../store/Types"
 
 const mapDispatchToProps = (dispatch: ((action: AddLetterAction) => any)) => {
     return {

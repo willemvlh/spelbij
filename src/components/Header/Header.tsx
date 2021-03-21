@@ -1,7 +1,7 @@
 import React from "react";
-import { WordState } from "../../store/types";
+import { GameState } from "../../store/Types";
 
-const header:React.FC<{state: WordState}> = ({state}) => {
+const header:React.FC<{state: GameState}> = ({state}) => {
     return <div id="top">
         <div id="input">
             {state.currentWord}

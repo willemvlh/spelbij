@@ -1,6 +1,7 @@
 import { Action } from "@reduxjs/toolkit";
 
-export type WordState = { currentWord: string, edgeLetters: string[], centerLetter: string, score: number, words: string[], foundWords: string[]}
+export type InitialState = {words: string[], edgeLetters: string[], centerLetter: string, expiryDate: number}
+export type GameState = InitialState & { currentWord: string, score: number, foundWords: string[], loaded: boolean}
 
 export interface AddLetterAction extends Action {
     type: "addLetter",
@@ -29,4 +30,11 @@ export interface UpdateScoreAction extends Action {
     }
 }
 
-export type WordAction = AddLetterAction | RemoveLetterAction | ResetWordAction | SubmitWordAction | UpdateScoreAction | ShuffleAction;
+export interface InitializeAction extends Action {
+    type: "initialize",
+    payload: {
+        state: GameState
+    }
+}
+
+export type WordAction = InitializeAction | AddLetterAction | RemoveLetterAction | ResetWordAction | SubmitWordAction | UpdateScoreAction | ShuffleAction;
