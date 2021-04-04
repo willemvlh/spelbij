@@ -30,7 +30,7 @@ const reducer: Reducer<GameState, WordAction> = (state, action) => {
             if(!(state.centerLetter + state.edgeLetters).includes(action.payload)){
                 return state;
             }
-            if(state.currentWord.length === 10){
+            if(state.currentWord.length === 19){
                 return state;
             }
             return { ...state, currentWord: state.currentWord.concat(action.payload) }

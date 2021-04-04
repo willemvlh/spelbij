@@ -6,6 +6,14 @@
     font-weight: bolder;
 }
 
+.small{
+    font-size: 1.8rem;
+}
+
+.extraSmall{
+    font-size: 1.3rem;
+}
+
 .centerLetter{
     color: gold;
 }

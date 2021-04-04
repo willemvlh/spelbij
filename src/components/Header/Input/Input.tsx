@@ -7,8 +7,15 @@ type InputComponentType = {
 }
 
 export const Input: React.FC<InputComponentType> = ({state}) => {
-    return <div className={styles.input}>
+
+    const inputStyle = (wordLength: number) => {
+        if(wordLength > 14) return styles.extraSmall;
+        if(wordLength > 9) return styles.small;
+        return ""
+    }
+
+    return <div className={styles.input + " " + inputStyle(state.currentWord.length)}>
         {Array.from(state.currentWord).map(c => <span
-            className={c == state.centerLetter ? styles.centerLetter : styles.edgeLetter}>{c}</span>)}
+            className={c === state.centerLetter ? styles.centerLetter : styles.edgeLetter}>{c}</span>)}
     </div>
 }
