@@ -1,17 +1,23 @@
 import React from "react";
 import styles from "./Header.module.css"
-import { GameState } from "../../store/Types";
+import {GameState} from "../../store/Types";
 import {Input} from "./Input/Input";
+import {Information} from "./Information";
 
+const Header: React.FC<{state: GameState}> = ({state}) => {
 
-const header:React.FC<{state: GameState}> = ({state}) => {
     return <div className={styles.top}>
         <Input state={state}/>
         <div id="meta">
-            <div id="score">Score: {state.score}</div>
-            <div id="words-left">Nog {state.words.length - state.foundWords.length} woorden</div>
+            <div id={styles.topLeft}>
+                <div>Score: <span className={styles.bold}>{state.score}</span></div>
+                <div id="words-left">Nog <span
+                    className={styles.bold}>{state.words.length - state.foundWords.length}</span> woorden
+                </div>
+            </div>
+            <Information/>
         </div>
     </div>
 }
 
-export default header;
+export default Header;

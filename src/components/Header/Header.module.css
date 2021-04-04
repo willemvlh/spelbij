@@ -4,3 +4,26 @@
     font-size: 0.8rem;
     padding-bottom: 5px;
 }
+
+.bold{
+    font-weight: bold;
+}
+
+#topLeft{
+    text-align: left;
+}
+
+#help{
+    display: flex;
+    align-items: flex-end
+}
+
+.modal{
+    width: 300px;
+    max-width: 95%;
+    border: solid 1px;
+    background: white;
+    margin: 15px auto auto;
+    padding: 20px;
+    box-shadow: 3px 3px 3px grey;
+}

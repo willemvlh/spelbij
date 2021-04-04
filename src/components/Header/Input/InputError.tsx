@@ -12,9 +12,9 @@ const mapDispatchToProps = dispatch => {
 const connector = connect(null, mapDispatchToProps)
 type Props = ConnectedProps<typeof connector>
 
-const InputError: React.FC<Props & InputErrorComponentType> = ({error, clearError}) => {
+const Feedback: React.FC<Props & InputErrorComponentType> = ({error, clearError}) => {
     useEffect(() => {
-        const timeout = setTimeout(() => clearError(), 1500);
+        const timeout = setTimeout(() => clearError(), 3000);
         return function(){
             clearTimeout(timeout)
         }
@@ -22,4 +22,4 @@ const InputError: React.FC<Props & InputErrorComponentType> = ({error, clearErro
     return <div className={styles.toast}>{error}</div>;
 }
 
-export default connector(InputError)
+export default connector(Feedback)

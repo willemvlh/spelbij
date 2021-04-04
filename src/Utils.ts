@@ -14,7 +14,7 @@ export const fetchGame: (() => Promise<InitialState>) = () => {
 }
 
 export const initializeGame: ((bare: InitialState) => GameState) = (bare) => {
-    return {...bare, foundWords: [], loaded: true, score: 0, currentWord: ""}
+    return {...bare, foundWords: [], loaded: true, score: 0, currentWord: "", inputError: null}
 }
 
 export const getGameFromStorageOrServer: (() => Promise<GameState>) = () => {
