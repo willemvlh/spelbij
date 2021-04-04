@@ -23,3 +23,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 dummy.json
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/spelbij.iml
+/.idea/vcs.xml

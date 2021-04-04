@@ -1,9 +1,8 @@
 import { connect, ConnectedProps } from "react-redux"
-import {ReactComponent as BackSpace} from "../../assets/backspace-black-18dp.svg";
-import {ReactComponent as Submit} from "../../assets/send-black-18dp.svg";
-import {ReactComponent as Flip} from "../../assets/flip_camera_android-black-18dp.svg";
+import ClearIcon from '@material-ui/icons/Clear';
 import React from "react";
-
+import styles from "./Buttons.module.css"
+import {FlipCameraAndroid, Send} from "@material-ui/icons";
 
 const mapDispatchToProps = dispatch => ({
     shuffle: () => dispatch({type: "shuffle"}),
@@ -16,10 +15,10 @@ type Props = ConnectedProps<typeof connector>
 
 
 const buttons: React.FunctionComponent<Props> = ({resetWord, submitWord, shuffle}) => {
-    return  <div className="buttons">
-        <div onClick={resetWord}><BackSpace/></div>
-        <div onClick={() => submitWord()}><Submit/></div>
-        <div onClick={shuffle}><Flip/></div>
+    return  <div className={styles.buttons}>
+        <div onClick={resetWord}><ClearIcon/></div>
+        <div onClick={() => submitWord()}><Send/></div>
+        <div onClick={shuffle}><FlipCameraAndroid/></div>
     </div>
 }
 

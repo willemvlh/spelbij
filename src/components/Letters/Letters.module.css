@@ -1,0 +1,9 @@
+div#hive{
+    display: flex;
+    height: 320px;
+    flex-wrap: wrap;
+    font-size: 3rem;
+    text-transform: uppercase;
+    text-align: center;
+    justify-content: space-between;
+}

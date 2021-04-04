@@ -1,0 +1,15 @@
+.middle{
+    background: gold;
+}
+
+.cell{
+    user-select: none;
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+    box-sizing: border-box;
+    border: solid 1px #ddd;
+    width: 100px;
+    height: 100px;
+    align-items: center;
+}

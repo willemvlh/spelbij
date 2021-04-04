@@ -1,0 +1,18 @@
+div#foundWords ul {
+	text-align: left;
+	list-style: none inside none;
+	margin: 0;
+	padding: 0;
+}
+
+#container{
+	font-family: "Roboto", sans-serif;
+	text-transform: uppercase;
+	text-align: center;
+	width: 320px;
+	height: 800px;
+	max-height: 95%;
+	margin: 20px auto 0 auto;
+	display: flex;
+	flex-direction: column;
+}

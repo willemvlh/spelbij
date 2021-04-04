@@ -1,6 +1,6 @@
 import {connect, ConnectedProps} from "react-redux"
 import {GameState} from "../../store/Types";
-import "./Grid.css";
+import styles from "./Grid.module.css";
 import React, {useEffect} from "react";
 import FoundsWords from "../FoundWords/FoundsWords";
 import Buttons from "../Buttons/Buttons";
@@ -35,7 +35,7 @@ const Grid: React.FunctionComponent<Props> = ({state, initialize}) => {
         })
 
     return (
-        <div id="container">
+        <div id={styles.container}>
             <Header state={state}/>
             <Letters edgeLetters={state.edgeLetters} centerLetter={state.centerLetter}/>
             <Buttons/>

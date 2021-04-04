@@ -1,14 +1,13 @@
 import React from "react";
+import styles from "./FoundWords.module.css"
 
 type FoundWordsComponentProps = {
     foundWords: string[]
 }
 
 const foundWords: React.FC<FoundWordsComponentProps> = ({foundWords}) => {
-    return <div id="foundWords">
-        <ul>
-            {foundWords.map((w => <li key={w}>{w}</li>))}
-        </ul>
+    return <div className={styles.container}>
+        {foundWords.map((w => <div className={styles.foundWord} key={w}>{w}</div>))}
     </div>
 }
 

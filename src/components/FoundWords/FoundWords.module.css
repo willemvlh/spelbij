@@ -1,0 +1,10 @@
+.foundWord{
+width: calc(100%/3)
+}
+
+.container{
+    padding-top: 15px;
+    border-top: solid 1px #ddd;
+    display: flex;
+    flex-wrap: wrap;
+}
