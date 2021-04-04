@@ -1,6 +1,7 @@
 import React from "react";
 import {GameState} from "../../../store/Types";
 import styles from "./Input.module.css"
+import InputError from "./InputError";
 
 type InputComponentType = {
     state: GameState
@@ -14,7 +15,10 @@ export const Input: React.FC<InputComponentType> = ({state}) => {
         return ""
     }
 
+    const inputError = state.inputError && <InputError error={state.inputError}/>
+
     return <div className={styles.input + " " + inputStyle(state.currentWord.length)}>
+        {inputError}
         {Array.from(state.currentWord).map(c => <span
             className={c === state.centerLetter ? styles.centerLetter : styles.edgeLetter}>{c}</span>)}
     </div>

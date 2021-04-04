@@ -1,8 +1,18 @@
-.foundWord{
-width: calc(100%/3)
+.foundWord {
+    width: calc(100% / 3);
+    animation: fadein 1s;
 }
 
-.container{
+@keyframes fadein {
+    0% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
+}
+
+.container {
     padding-top: 15px;
     border-top: solid 1px #ddd;
     display: flex;

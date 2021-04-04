@@ -17,3 +17,17 @@
 .centerLetter{
     color: gold;
 }
+
+.toast{
+    font-size: 1rem;
+    padding: 6px;
+    opacity: 0;
+    font-weight: lighter;
+    animation: fade 1.5s;
+
+}
+
+@keyframes fade {
+    0%,100% { opacity: 0 }
+    30%,70% { opacity: 1 }
+}
