@@ -2,11 +2,11 @@ import {GameState, InitialState} from "./store/Types";
 
 export const log = (info: any) => console.debug(info)
 
-const backendUrl = process.env.REACT_APP_LAMBDA
+const backendUrl = /*process.env.REACT_APP_LAMBDA*/ "https://spelbij-games.s3.eu-central-1.amazonaws.com/game.json"
 
 export const fetchGame: (() => Promise<InitialState>) = () => {
     if(!backendUrl){
-        throw new Error("Backend url must not be empty - please set LAMBDA env var")
+        throw new Error("Backend url must not be empty - set REACT_APP_LAMBDA env var")
     }
     return fetch(backendUrl)
         .then(r => r.json())
@@ -23,8 +23,12 @@ export const getGameFromStorageOrServer: (() => Promise<GameState>) = () => {
     if(serializedState){
         const state: GameState = JSON.parse(serializedState)
         console.log("Found state in storage")
-        console.log("Expiry date: " + new Date(state.expiryDate * 1000).toISOString())
-        if(state.expiryDate * 1000 < Date.now()){
+        if(Object.keys(state).includes("message")){
+            console.log("State is invalid. Refetching");
+            return fetchGame().then(s => initializeGame(s))
+        }
+        console.log("Expiry date: " + new Date(state.expiryDate).toISOString())
+        if(state.expiryDate < Date.now()){
             console.log("Game is expired")
             //if local game is expired, fetch a new one
             return fetchGame().then(s => initializeGame(s))

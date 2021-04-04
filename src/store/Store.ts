@@ -18,8 +18,6 @@ const initialState: GameState = {
 
 const reducer: Reducer<GameState, WordAction> = (state, action) => {
     if(state === undefined){
-        console.log("state is undefined - returning loading state")
-        console.log(action)
         let a = action as InitializeAction
         return a.payload?.state ?? initialState
     }
