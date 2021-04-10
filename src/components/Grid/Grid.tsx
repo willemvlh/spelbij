@@ -2,7 +2,7 @@ import {connect, ConnectedProps} from "react-redux"
 import {GameState} from "../../store/Types";
 import styles from "./Grid.module.css";
 import React, {useEffect} from "react";
-import FoundsWords from "../FoundWords/FoundsWords";
+import FoundsWords from "../FoundWords/FoundWords";
 import Buttons from "../Buttons/Buttons";
 import Letters from "../Letters/Letters";
 import Header from "../Header/Header"

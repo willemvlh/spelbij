@@ -5,10 +5,10 @@ type FoundWordsComponentProps = {
     foundWords: string[]
 }
 
-const foundWords: React.FC<FoundWordsComponentProps> = ({foundWords}) => {
+const FoundWords: React.FC<FoundWordsComponentProps> = ({foundWords}) => {
     return <div className={styles.container}>
-        {foundWords.map((w => <div className={styles.foundWord} key={w}>{w}</div>))}
+        {foundWords.sort().map((w => <div className={styles.foundWord} key={w}>{w}</div>))}
     </div>
 }
 
-export default foundWords
+export default FoundWords
