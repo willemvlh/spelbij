@@ -30,14 +30,14 @@ export const reducer: Reducer<GameState, WordAction> = (state, action) => {
             if (state.currentWord.length === 19) {
                 return state;
             }
-            return {...state, currentWord: state.currentWord.concat(action.payload)}
+            return {...state, inputError: null, currentWord: state.currentWord.concat(action.payload)}
         case "resetWord":
             return {...state, currentWord: ""}
         case "submitWord": {
             const newState = {...state, currentWord: ""}
             const word = state.currentWord
             if (state.foundWords.includes(word)) {
-                return newState
+                return {...newState, inputError: "Dit woord is al gevonden"}
             }
             if (word.length < 4){
                 return {...newState, inputError: "Woord moet minstens 4 karakters bevatten."}
@@ -48,7 +48,7 @@ export const reducer: Reducer<GameState, WordAction> = (state, action) => {
             if (state.words.includes(word)) {
                 return {...newState, score: state.score + word.length, foundWords: [...state.foundWords, word]}
             }
-            return newState
+            return {...newState, inputError: "Onbekend woord"}
         }
         case "updateScore":
             return {...state, score: state.score + action.payload.addPoints}
