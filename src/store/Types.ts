@@ -1,6 +1,6 @@
 import {Action} from "@reduxjs/toolkit";
 
-export type InitialState = { words: string[], edgeLetters: string[], centerLetter: string, expiryDate: number }
+export type InitialState = { words: string[], edgeLetters: string[], centerLetter: string }
 export type GameState = InitialState &
     {
         currentWord: string,

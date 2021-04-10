@@ -1,8 +1,8 @@
 import {GameState, InitialState} from "./store/Types";
 
-export const log = (info: any) => console.debug(info)
+export const log = (info: any) => process.env.NODE_ENV === "development" && console.debug(info)
 
-const backendUrl = /*process.env.REACT_APP_LAMBDA*/ "https://spelbij-games.s3.eu-central-1.amazonaws.com/game.json"
+const backendUrl = /*process.env.REACT_APP_LAMBDA*/ "https://k5pn0dzua9.execute-api.us-east-1.amazonaws.com/default/Spelbij-game-creator"
 
 export const fetchGame: (() => Promise<InitialState>) = () => {
     if(!backendUrl){
@@ -22,22 +22,14 @@ export const getGameFromStorageOrServer: (() => Promise<GameState>) = () => {
     const serializedState = localStorage.getItem("gameState")
     if(serializedState){
         const state: GameState = JSON.parse(serializedState)
-        console.log("Found state in storage")
+        log("Found state in storage")
         if(Object.keys(state).includes("message")){
-            console.log("State is invalid. Refetching");
+            log("State is invalid. Refetching");
             return fetchGame().then(s => initializeGame(s))
         }
-        console.log("Expiry date: " + new Date(state.expiryDate).toISOString())
-        if(state.expiryDate < Date.now()){
-            console.log("Game is expired")
-            //if local game is expired, fetch a new one
-            return fetchGame().then(s => initializeGame(s))
-        }
-        console.log("Game is not expired")
-        //if not expired, return saved game
         return Promise.resolve(state)
     }
-    console.log("Nothing in local storage, fetch from server")
+    log("Nothing in local storage, fetch from server")
     //nothing in local storage, fetch from server
     return fetchGame().then(s => initializeGame(s))
 }

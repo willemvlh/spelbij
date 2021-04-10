@@ -10,7 +10,6 @@ const initialState: GameState = {
     words: [],
     foundWords: [],
     loaded: false,
-    expiryDate: 0,
     inputError: null
 };
 export const reducer: Reducer<GameState, WordAction> = (state, action) => {
