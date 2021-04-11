@@ -7,12 +7,18 @@ export type GameState = InitialState &
         score: number,
         foundWords: string[],
         loaded: boolean
-        inputError: string | null
+        inputError: string | null,
+        wasStopped: boolean,
+        previousScore: number
     }
 
 export interface AddLetterAction extends Action {
     type: "addLetter",
     payload: string
+}
+
+export interface StopGameAction extends Action {
+    type: "stopGame",
 }
 
 export interface RemoveLetterAction extends Action {
@@ -57,4 +63,5 @@ export type WordAction =
     | ResetWordAction
     | SubmitWordAction
     | UpdateScoreAction
-    | ShuffleAction;
+    | ShuffleAction
+    | StopGameAction;

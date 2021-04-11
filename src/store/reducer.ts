@@ -10,7 +10,9 @@ const initialState: GameState = {
     words: [],
     foundWords: [],
     loaded: false,
-    inputError: null
+    inputError: null,
+    wasStopped: false,
+    previousScore: 0
 };
 export const reducer: Reducer<GameState, WordAction> = (state, action) => {
     if (state === undefined) {
@@ -18,6 +20,8 @@ export const reducer: Reducer<GameState, WordAction> = (state, action) => {
         return a.payload?.state ?? initialState
     }
     switch (action.type) {
+        case "stopGame":
+            return {...initialState, wasStopped: true}
         case "initialize":
             return {...action.payload.state, loaded: true}
         case "removeLetter":
@@ -45,7 +49,7 @@ export const reducer: Reducer<GameState, WordAction> = (state, action) => {
                 return {...newState, inputError: `Woord moet minstens 1 ${state.centerLetter.toUpperCase()} bevatten.`}
             }
             if (state.words.includes(word)) {
-                return {...newState, score: state.score + word.length, foundWords: [...state.foundWords, word]}
+                return {...newState, score: state.score + word.length, previousScore: state.score, foundWords: [...state.foundWords, word]}
             }
             return {...newState, inputError: "Onbekend woord"}
         }
@@ -55,6 +59,7 @@ export const reducer: Reducer<GameState, WordAction> = (state, action) => {
             return {...state, edgeLetters: shuffle(state.edgeLetters)}
         case "clearError":
             return {...state, inputError: null}
+
         default:
             throw new Error("Unknown action: " + action["type"])
     }

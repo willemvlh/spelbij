@@ -1,21 +1,17 @@
 import styles from "./Header.module.css";
-import {Help} from "@material-ui/icons";
-import Modal from "react-modal";
+import {Help, ImportContacts} from "@material-ui/icons";
 import React, {useState} from "react";
+import InfoModal from "./Modals/InfoModal";
+import HelpModal from "./Modals/HelpModal";
 
 export const Information = () => {
-    let [modalIsOpen, setModalIsOpen] = useState(false);
-    const closeModal = () => setModalIsOpen(false);
+    let [helpModalIsOpen, setHelpModalIsOpen] = useState(false);
+    let [infoModalIsOpen, setInfoModalIsOpen] = useState(false);
+    return <div id={styles.help}>
+        <ImportContacts className={styles.icon} onClick={() => setInfoModalIsOpen(true)} />
+        <Help className={styles.icon} style={{paddingLeft: "5px"}} onClick={() => setHelpModalIsOpen(true)} fontSize={"default"}/>
 
-    return <div id={styles.help}><Help style={{cursor: "pointer"}} onClick={() => setModalIsOpen(true)} fontSize={"large"} htmlColor={"#444"}/>
-        <Modal  className={styles.modal} ariaHideApp={false} onRequestClose={closeModal} contentLabel={"Hallo"}
-               isOpen={modalIsOpen} shouldCloseOnEsc={true}>
-            <h1>Spelbij</h1>
-            <ul>
-                <li>Woorden moeten minstens 4 letters tellen.</li>
-                <li>Woorden moeten de middenste letter bevatten.</li>
-                <li>Letters mogen meerdere keren gebruikt worden.</li>
-            </ul>
-        </Modal>
+        <HelpModal isOpen={helpModalIsOpen} onRequestClose={() => setHelpModalIsOpen(false)}/>
+        <InfoModal isOpen={infoModalIsOpen} onRequestClose={() => setInfoModalIsOpen(false)}/>
     </div>;
 }

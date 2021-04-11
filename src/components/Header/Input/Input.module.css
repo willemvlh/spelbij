@@ -4,6 +4,7 @@
     margin-top: 15px;
     padding-bottom: 5px;
     font-weight: bolder;
+    text-transform: uppercase;
 }
 
 .small{
@@ -24,6 +25,7 @@
     opacity: 0;
     font-weight: lighter;
     animation: fade 1.5s;
+    text-transform: none;
 
 }
 

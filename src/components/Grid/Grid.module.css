@@ -6,8 +6,7 @@ div#foundWords ul {
 }
 
 #container{
-	font-family: "Roboto", sans-serif;
-	text-transform: uppercase;
+	font-family: "Noto Serif", serif;
 	text-align: center;
 	width: 320px;
 	height: 800px;

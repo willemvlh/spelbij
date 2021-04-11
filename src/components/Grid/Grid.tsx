@@ -31,7 +31,7 @@ type Props = ConnectedProps<typeof connector>
 
 const Grid: React.FunctionComponent<Props> = ({state, initialize}) => {
     useEffect(() => {
-        if (!state.loaded) initialize()
+        if (!state.loaded && !state.wasStopped) initialize()
         })
 
     return (
