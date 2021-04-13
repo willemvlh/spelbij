@@ -39,7 +39,7 @@ const Grid: React.FunctionComponent<Props> = ({state, initialize}) => {
             <Header state={state}/>
             <Letters edgeLetters={state.edgeLetters} centerLetter={state.centerLetter}/>
             <Buttons/>
-            <FoundsWords foundWords={state.foundWords}/>
+            <FoundsWords />
         </div>
     )
 }
