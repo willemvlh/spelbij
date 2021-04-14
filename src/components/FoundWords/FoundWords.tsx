@@ -11,23 +11,25 @@ type Props = ConnectedProps<typeof connector>
 const FoundWords: React.FC<Props> = ({state}) => {
     const startsWithLetter: ((w: string, l: string) => boolean) = (w,l) => w[0].toLowerCase() === l;
     return <div className={styles.container}>
-        {state.edgeLetters.concat(state.centerLetter).map(letter => {
+        {state.edgeLetters.concat(state.centerLetter).sort().map(letter => {
             const foundWords = state.foundWords.filter(word => startsWithLetter(word, letter));
             const allWords = state.words.filter(word => startsWithLetter(word, letter));
-            return <div className={styles.foundHeader}>
-                    <div className={styles.letter}>
-                        <span>{letter}</span>
-                        <span className={styles.letterCount}>({foundWords.length} / {allWords.length})</span></div>
+            return <div className={styles.foundWordsPart}>
+                    <div className={styles.header}>
+                        <span className={styles.letter}>{letter}</span>
+                        <span className={styles.letterCount}>({foundWords.length} / {allWords.length})</span>
 
-                    {foundWords.map(word =>
-                        <div>{word}</div>
-                    )}
+                    </div>
+
+                    <div className={styles.foundWordsContainer}>
+                        {foundWords.map(word =>
+                            <div className={styles.word}>{word}</div>
+                        )}
+                    </div>
                 </div>;
             }
         )}
 
     </div>
 }
-//{foundWords.sort().map((w => <div className={styles.foundWord} key={w}>{w}</div>))}
-
 export default connector(FoundWords)
