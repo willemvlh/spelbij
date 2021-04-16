@@ -1,7 +1,7 @@
 import styles from "./Header.module.css";
 import {Help, ImportContacts} from "@material-ui/icons";
 import React, {useState} from "react";
-import InfoModal from "./Modals/InfoModal";
+import InfoModal from "./Modals/NewGameModal/NewGameModal";
 import HelpModal from "./Modals/HelpModal";
 
 export const Information = () => {

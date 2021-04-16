@@ -1,12 +1,21 @@
 import {GameState, InitialState} from "./store/Types";
 
-export const log = (info: any) => process.env.NODE_ENV === "development" && console.debug(info)
+const isDevelopment = process.env.NODE_ENV === "development";
+export const log = (info: any) => isDevelopment && console.debug(info)
 
 const backendUrl = /*process.env.REACT_APP_LAMBDA*/ "https://k5pn0dzua9.execute-api.us-east-1.amazonaws.com/default/Spelbij-game-creator"
 
 export const fetchGame: (() => Promise<InitialState>) = () => {
     if(!backendUrl){
         throw new Error("Backend url must not be empty - set REACT_APP_LAMBDA env var")
+    }
+    if(isDevelopment){
+        const state: InitialState = {
+            centerLetter: "a",
+            edgeLetters: "bcdefghi".split(""),
+            words: ["hieba", "abcd", "deca"]
+        }
+        return new Promise(resolve => setTimeout(() => resolve(state), 2000))
     }
     return fetch(backendUrl)
         .then(r => r.json())

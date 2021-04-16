@@ -14,7 +14,7 @@ const FoundWords: React.FC<Props> = ({state}) => {
         {state.edgeLetters.concat(state.centerLetter).sort().map(letter => {
             const foundWords = state.foundWords.filter(word => startsWithLetter(word, letter));
             const allWords = state.words.filter(word => startsWithLetter(word, letter));
-            return <div className={styles.foundWordsPart}>
+            return <div key={letter} className={styles.foundWordsPart}>
                     <div className={styles.header}>
                         <span className={styles.letter}>{letter}</span>
                         <span className={styles.letterCount}>({foundWords.length} / {allWords.length})</span>
@@ -23,7 +23,7 @@ const FoundWords: React.FC<Props> = ({state}) => {
 
                     <div className={styles.foundWordsContainer}>
                         {foundWords.map(word =>
-                            <div className={styles.word}>{word}</div>
+                            <div key={word} className={styles.word}>{word}</div>
                         )}
                     </div>
                 </div>;
