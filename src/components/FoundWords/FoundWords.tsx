@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./FoundWords.module.css"
 import {GameState} from "../../store/Types";
 import {connect, ConnectedProps} from "react-redux"
+import {WordListForLetter} from "../WordListForLetter/WordListForLetter";
 
 type StateProps = { state: GameState }
 const mapStateToProps: (state: GameState) => StateProps = (state) => ({state: state})
@@ -14,19 +15,7 @@ const FoundWords: React.FC<Props> = ({state}) => {
         {state.edgeLetters.concat(state.centerLetter).sort().map(letter => {
             const foundWords = state.foundWords.filter(word => startsWithLetter(word, letter));
             const allWords = state.words.filter(word => startsWithLetter(word, letter));
-            return <div key={letter} className={styles.foundWordsPart}>
-                    <div className={styles.header}>
-                        <span className={styles.letter}>{letter}</span>
-                        <span className={styles.letterCount}>({foundWords.length} / {allWords.length})</span>
-
-                    </div>
-
-                    <div className={styles.foundWordsContainer}>
-                        {foundWords.map(word =>
-                            <div key={word} className={styles.word}>{word}</div>
-                        )}
-                    </div>
-                </div>;
+            return <WordListForLetter key={letter} letter={letter} foundWords={foundWords} allWords={allWords} displayMissedWords={false}/>;
             }
         )}
 

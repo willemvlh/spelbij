@@ -15,7 +15,7 @@ export const fetchGame: (() => Promise<InitialState>) = () => {
             edgeLetters: "bcdefghi".split(""),
             words: ["hieba", "abcd", "deca"]
         }
-        return new Promise(resolve => setTimeout(() => resolve(state), 2000))
+        return new Promise(resolve => setTimeout(() => resolve(state), 1800))
     }
     return fetch(backendUrl)
         .then(r => r.json())

@@ -12,6 +12,7 @@ export const Information = () => {
         <Help className={styles.icon} style={{paddingLeft: "5px"}} onClick={() => setHelpModalIsOpen(true)} fontSize={"default"}/>
 
         <HelpModal isOpen={helpModalIsOpen} onRequestClose={() => setHelpModalIsOpen(false)}/>
-        <InfoModal isOpen={infoModalIsOpen} onRequestClose={() => setInfoModalIsOpen(false)}/>
+        {/*check below to make sure modal gets destroyed upon closing */}
+        {infoModalIsOpen && <InfoModal isOpen={infoModalIsOpen} onRequestClose={() => setInfoModalIsOpen(false)}/>}
     </div>;
 }
