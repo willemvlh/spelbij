@@ -3,7 +3,8 @@ import React from "react";
 
 export function WordListForLetter(props: { letter: string, foundWords: string[], allWords: string[], displayMissedWords: boolean }) {
     const wordsToShow = props.displayMissedWords ? props.allWords : props.foundWords
-    const missedWords = props.allWords.filter(w => !props.foundWords.includes(w))
+    const calculateStyle = (word: string) => props.foundWords.includes(word) ? styles.foundWord : styles.missedWord
+
     return <div className={styles.foundWordsPart}>
         <div className={styles.header}>
             <span className={styles.letter}>{props.letter}</span>
@@ -12,7 +13,7 @@ export function WordListForLetter(props: { letter: string, foundWords: string[],
 
         <div className={styles.foundWordsContainer}>
             {wordsToShow.map(word =>
-                <div key={word} className={styles.word + missedWords.includes(word) && styles.missedWord}>{word}</div>
+                <div key={word} className={styles.word + " " + calculateStyle(word)}>{word}</div>
             )}
         </div>
     </div>;

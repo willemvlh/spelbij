@@ -1,4 +1,6 @@
 import {GameState, InitialState} from "./store/Types";
+import Dummy from "./dummyRequest"
+
 
 const isDevelopment = process.env.NODE_ENV === "development";
 export const log = (info: any) => isDevelopment && console.debug(info)
@@ -9,17 +11,11 @@ export const fetchGame: (() => Promise<InitialState>) = () => {
     if(!backendUrl){
         throw new Error("Backend url must not be empty - set REACT_APP_LAMBDA env var")
     }
-    if(isDevelopment){
-        const state: InitialState = {
-            centerLetter: "a",
-            edgeLetters: "bcdefghi".split(""),
-            words: ["hieba", "abcd", "deca"]
-        }
-        return new Promise(resolve => setTimeout(() => resolve(state), 1800))
-    }
-    return fetch(backendUrl)
-        .then(r => r.json())
-        .then(game => game)
+    return isDevelopment
+        ? new Promise(resolve => setTimeout(() => resolve(Dummy), 1800))
+        : fetch(backendUrl)
+            .then(r => r.json())
+            .then(game => game)
 }
 
 export const initializeGame: ((bare: InitialState) => GameState) = (bare) => {

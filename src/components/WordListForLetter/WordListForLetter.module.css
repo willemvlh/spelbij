@@ -4,11 +4,6 @@
     font-size: 1.5rem;
 }
 
-.foundWord {
-    width: calc(100% / 3);
-    animation: fadein 1s;
-}
-
 .header{
     border-bottom: solid 1px #ddd;
     margin-bottom: 9px;
@@ -16,7 +11,7 @@
 
 .word{
     margin-right: 17px;
-    animation-name: fadein;
+    animation: fadein 0.5s;
 }
 
 .foundWordsPart {
@@ -39,4 +34,13 @@
 .letterCount {
     font-size: small;
     margin-left: 5px
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
 }
