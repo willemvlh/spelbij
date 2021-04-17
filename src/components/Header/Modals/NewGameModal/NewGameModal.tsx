@@ -50,8 +50,8 @@ const NewGameModal: React.FC<ModalProps & StateProps> = (props) => {
     };
 
     return <SBModal shouldCloseOnOverlayClick={!buttonWasClicked} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
-        <Button disabled={buttonWasClicked} onClick={startNewGame}>Load new game</Button>
-        <Button disabled={!gameIsLoaded} onClick={props.onRequestClose}>Start</Button>
+        <Button className={styles.button} disabled={buttonWasClicked} onClick={startNewGame}>Load new game</Button>
+        <Button className={styles.button} disabled={!gameIsLoaded} onClick={props.onRequestClose}>Start</Button>
         {buttonWasClicked &&
         <>
             {gameIsLoaded || <LoopIcon className={styles.spin}/>}
