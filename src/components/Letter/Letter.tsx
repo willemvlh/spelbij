@@ -13,7 +13,7 @@ const LetterComponent = ({ letter, isMiddle, addLetter }: any) => {
     const [showFlash, setShowFlash] = useState(false);
     const onMouseUp = () => setShowFlash(false)
 
-    return <div onMouseDown={() => setShowFlash(true)} onMouseLeave={onMouseUp} onMouseUp={onMouseUp} onClick={() => addLetter(letter)}
+    return <div onPointerDown={() => setShowFlash(true)} onMouseLeave={onMouseUp} onPointerUp={onMouseUp} onClick={() => addLetter(letter)}
          className={`${styles.cell} ${(showFlash ? styles.flash : "")} ${isMiddle ? ` ${styles.middle} ` : styles.cell}`}>{letter}</div>;
 }
 
