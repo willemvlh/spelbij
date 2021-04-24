@@ -25,11 +25,14 @@
     margin-bottom: 9px;
     display: flex;
     flex-wrap: wrap;
+    font-family: "Noto Serif", serif;
 }
 
 .missedWord{
     font-style: italic;
 }
+
+.foundWord{}
 
 .letterCount {
     font-size: small;

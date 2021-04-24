@@ -5,8 +5,8 @@ import {Button, makeStyles} from "@material-ui/core";
 import {GameState, InitializeAction, StopGameAction} from "../../../../store/Types";
 import {connect, ConnectedProps} from "react-redux";
 import {fetchGame, initializeGame} from "../../../../Utils";
-import LoopIcon from '@material-ui/icons/Loop';
 import {WordListForLetter} from "../../../WordListForLetter/WordListForLetter";
+import LoadingIcon from "../../../LoadingIcon/LoadingIcon";
 
 
 type ModalProps = {
@@ -66,8 +66,8 @@ const NewGameModal: React.FC<ModalProps & StateProps> = (props) => {
         </div>
             {buttonWasClicked &&
         <>
-            {gameIsLoaded || <LoopIcon className={styles.spin}/>}
-            {letters.map(letter => <WordListForLetter letter={letter}
+            {gameIsLoaded || <LoadingIcon />}
+            {letters.map(letter => <WordListForLetter key={letter} letter={letter}
                                                             foundWords={foundWords.filter(w => w.startsWith(letter))}
                                                             allWords={allWords.filter(w => w.startsWith(letter))}
                                                             displayMissedWords={true}/>)}

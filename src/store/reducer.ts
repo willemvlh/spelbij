@@ -14,6 +14,33 @@ const initialState: GameState = {
     wasStopped: false,
     previousScore: 0
 };
+
+const calculateNewScore: ((score: number, word: string, centerLetter: string) => number) = (score,word,centerLetter) => {
+    const basicScore = word.length;
+    const centerLetterBonus = Array.from(word).filter(l => l === centerLetter).length - 1;
+    const longWordBonus = Math.max(0, word.length - 5);
+    const fullWordScore = basicScore + centerLetterBonus + longWordBonus;
+    return score + fullWordScore;
+}
+
+function handleWordSubmission(state: GameState) {
+    const newState = {...state, currentWord: ""}
+    const word = state.currentWord
+    if (state.foundWords.includes(word)) {
+        return {...newState, inputError: "Dit woord is al gevonden"}
+    }
+    if (word.length < 4){
+        return {...newState, inputError: "Woord moet minstens 4 karakters bevatten."}
+    }
+    if (!word.includes(state.centerLetter)) {
+        return {...newState, inputError: `Woord moet minstens 1 ${state.centerLetter.toUpperCase()} bevatten.`}
+    }
+    if (state.words.includes(word)) {
+        return {...newState, score: calculateNewScore(state.score, word, state.centerLetter), previousScore: state.score, foundWords: [...state.foundWords, word]}
+    }
+    return {...newState, inputError: "Onbekend woord"}
+}
+
 export const reducer: Reducer<GameState, WordAction> = (state, action) => {
     if (state === undefined) {
         let a = action as InitializeAction
@@ -37,21 +64,7 @@ export const reducer: Reducer<GameState, WordAction> = (state, action) => {
         case "resetWord":
             return {...state, currentWord: ""}
         case "submitWord": {
-            const newState = {...state, currentWord: ""}
-            const word = state.currentWord
-            if (state.foundWords.includes(word)) {
-                return {...newState, inputError: "Dit woord is al gevonden"}
-            }
-            if (word.length < 4){
-                return {...newState, inputError: "Woord moet minstens 4 karakters bevatten."}
-            }
-            if (!word.includes(state.centerLetter)) {
-                return {...newState, inputError: `Woord moet minstens 1 ${state.centerLetter.toUpperCase()} bevatten.`}
-            }
-            if (state.words.includes(word)) {
-                return {...newState, score: state.score + word.length, previousScore: state.score, foundWords: [...state.foundWords, word]}
-            }
-            return {...newState, inputError: "Onbekend woord"}
+            return handleWordSubmission(state)
         }
         case "updateScore":
             return {...state, score: state.score + action.payload.addPoints}
