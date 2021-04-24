@@ -1,7 +1,7 @@
 import SBModal from "../../Modal";
 import React, {useState} from "react";
 import styles from "./NewGameModal.module.css"
-import {Button} from "@material-ui/core";
+import {Button, makeStyles} from "@material-ui/core";
 import {GameState, InitializeAction, StopGameAction} from "../../../../store/Types";
 import {connect, ConnectedProps} from "react-redux";
 import {fetchGame, initializeGame} from "../../../../Utils";
@@ -40,6 +40,16 @@ const NewGameModal: React.FC<ModalProps & StateProps> = (props) => {
     const [buttonWasClicked, setButtonWasClicked] = useState(false);
     const [gameIsLoaded, setGameIsLoaded] = useState(false);
 
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            '& > *': {
+                margin: theme.spacing(1),
+            },
+        },
+    }));
+
+    const classes = useStyles();
+
     const startNewGame = async () => {
         setButtonWasClicked(true)
         setLetters(props.letters);
@@ -50,9 +60,11 @@ const NewGameModal: React.FC<ModalProps & StateProps> = (props) => {
     };
 
     return <SBModal shouldCloseOnOverlayClick={!buttonWasClicked} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
-        <Button className={styles.button} disabled={buttonWasClicked} onClick={startNewGame}>Load new game</Button>
-        <Button className={styles.button} disabled={!gameIsLoaded} onClick={props.onRequestClose}>Start</Button>
-        {buttonWasClicked &&
+        <div className={classes.root}>
+        <Button className={styles.button} variant={"contained"} color={"primary"} disabled={buttonWasClicked} onClick={startNewGame}>Nieuw spel laden</Button>
+        <Button className={styles.button} color={"secondary"} variant={"contained"} disabled={!gameIsLoaded} onClick={props.onRequestClose}>Start</Button>
+        </div>
+            {buttonWasClicked &&
         <>
             {gameIsLoaded || <LoopIcon className={styles.spin}/>}
             {letters.map(letter => <WordListForLetter letter={letter}
@@ -62,6 +74,7 @@ const NewGameModal: React.FC<ModalProps & StateProps> = (props) => {
         </>
         }
     </SBModal>
+
 }
 
 export default connector(NewGameModal)
