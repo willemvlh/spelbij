@@ -39,16 +39,6 @@
     align-items: flex-end
 }
 
-.modal{
-    width: 300px;
-    max-width: 95%;
-    border: solid 1px #aaa;
-    background: white;
-    margin: 15px auto auto;
-    padding: 20px;
-    box-shadow: 3px 3px 3px grey;
-}
-
 @keyframes fade-out {
     0%   {opacity: 0}
     40% {opacity: 1}
