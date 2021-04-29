@@ -1,24 +1,24 @@
 import { connect, ConnectedProps } from "react-redux"
-import ClearIcon from '@material-ui/icons/Clear';
 import React from "react";
 import styles from "./Buttons.module.css"
-import {FlipCameraAndroid, Send} from "@material-ui/icons";
+import {Backspace, FlipCameraAndroid, Send} from "@material-ui/icons";
+import {WordAction} from "../../store/Types";
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: (action: WordAction) => any) => ({
     shuffle: () => dispatch({type: "shuffle"}),
-    resetWord: () => dispatch({type: "resetWord"}),
-    submitWord: () => dispatch({type: "submitWord"})
+    submitWord: () => dispatch({type: "submitWord"}),
+    backspace: () => dispatch({type: "removeLetter"})
 })
 
 const connector = connect(null, mapDispatchToProps)
 type Props = ConnectedProps<typeof connector>
 
 
-const buttons: React.FunctionComponent<Props> = ({resetWord, submitWord, shuffle}) => {
+const buttons: React.FunctionComponent<Props> = ({submitWord, shuffle, backspace}) => {
     return  <div className={styles.buttons}>
-        <div onClick={resetWord}><ClearIcon/></div>
-        <div onClick={() => submitWord()}><Send/></div>
-        <div onClick={shuffle}><FlipCameraAndroid/></div>
+        <Backspace onClick={backspace}/>
+        <Send onClick={submitWord}/>
+        <FlipCameraAndroid onClick={shuffle}/>
     </div>
 }
 
