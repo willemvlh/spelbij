@@ -12,9 +12,9 @@
     width: 100px;
     height: 100px;
     align-items: center;
-    transition: background 50ms;
+    transition: background 0.1s
 }
 
-.flash{
-    background: #ddeded;
+.cell:active{
+    background: #ccc;
 }
