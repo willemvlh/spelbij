@@ -12,8 +12,9 @@
     width: 100px;
     height: 100px;
     align-items: center;
+    transition: background 0.2s;
 }
 
 .flash{
-    background: #ededed;
+    background: #ddeded;
 }

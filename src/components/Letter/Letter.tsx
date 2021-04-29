@@ -11,9 +11,12 @@ const mapDispatchToProps = (dispatch: ((action: AddLetterAction) => any)) => {
 
 const LetterComponent = ({ letter, isMiddle, addLetter }: any) => {
     const [showFlash, setShowFlash] = useState(false);
-    const onMouseUp = () => setShowFlash(false)
-
-    return <div onPointerDown={() => setShowFlash(true)} onPointerLeave={onMouseUp} onPointerUp={onMouseUp} onClick={() => addLetter(letter)}
+    const onClick = () => {
+        setShowFlash(true);
+        addLetter(letter);
+        setTimeout(() => setShowFlash(false), 100);
+    }
+    return <div onClick={onClick}
          className={`${styles.cell} ${(showFlash ? styles.flash : "")} ${isMiddle ? ` ${styles.middle} ` : styles.cell}`}>{letter}</div>;
 }
 
