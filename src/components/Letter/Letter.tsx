@@ -14,7 +14,7 @@ const LetterComponent = ({ letter, isMiddle, addLetter }: any) => {
     const onClick = () => {
         setShowFlash(true);
         addLetter(letter);
-        setTimeout(() => setShowFlash(false), 100);
+        setTimeout(() => setShowFlash(false), 50);
     }
     return <div onClick={onClick}
          className={`${styles.cell} ${(showFlash ? styles.flash : "")} ${isMiddle ? ` ${styles.middle} ` : styles.cell}`}>{letter}</div>;
