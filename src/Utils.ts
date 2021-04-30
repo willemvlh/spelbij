@@ -1,4 +1,4 @@
-import {GameState, InitialState} from "./store/Types";
+import {GameState, InitialState, PlayerState} from "./store/Types";
 import Dummy from "./dummyRequest"
 
 
@@ -18,8 +18,27 @@ export const fetchGame: (() => Promise<InitialState>) = () => {
             .then(game => game)
 }
 
+const initialPlayerState: PlayerState = {
+    name: "",
+    score: 0,
+    previousScore: 0
+}
+
+export const InitialGameState: GameState = {
+    player: initialPlayerState,
+    currentWord: "",
+    edgeLetters: [],
+    centerLetter: "",
+    words: [],
+    foundWords: [],
+    loaded: false,
+    inputError: null,
+    wasStopped: false,
+    otherPlayers: []
+};
+
 export const initializeGame: ((bare: InitialState) => GameState) = (bare) => {
-    return {...bare, foundWords: [], loaded: true, score: 0, currentWord: "", inputError: null, wasStopped: false, previousScore: 0}
+    return {...InitialGameState, ...bare}
 }
 
 export const getGameFromStorageOrServer: (() => Promise<GameState>) = () => {

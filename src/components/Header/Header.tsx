@@ -13,13 +13,13 @@ const Header: React.FC<{ state: GameState }> = ({state}) => {
         return function(){
             clearTimeout(timeout)
         }
-    }, [state.previousScore])
+    }, [state.player.previousScore])
     return <div className={styles.top}>
         <Input state={state}/>
         <div id="meta">
             <div id={styles.topLeft}>
-                <div><span className={styles.score}>{state.score}</span><span
-                    className={styles.pointsAddedSize + " " + pointsAddedStyle}>+{state.score - state.previousScore}</span></div>
+                <div><span className={styles.score}>{state.player.score}</span><span
+                    className={styles.pointsAddedSize + " " + pointsAddedStyle}>+{state.player.score - state.player.previousScore}</span></div>
             </div>
             <Information/>
         </div>

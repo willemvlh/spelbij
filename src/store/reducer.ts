@@ -1,19 +1,9 @@
 import {Reducer} from "@reduxjs/toolkit";
 import {GameState, InitializeAction, WordAction} from "./Types";
 import {shuffle} from "lodash";
+import {InitialGameState} from "../Utils";
 
-const initialState: GameState = {
-    currentWord: "",
-    edgeLetters: [],
-    centerLetter: "",
-    score: 0,
-    words: [],
-    foundWords: [],
-    loaded: false,
-    inputError: null,
-    wasStopped: false,
-    previousScore: 0
-};
+
 
 const calculateNewScore: ((score: number, word: string, centerLetter: string) => number) = (score,word,centerLetter) => {
     const basicScore = word.length;
@@ -23,7 +13,7 @@ const calculateNewScore: ((score: number, word: string, centerLetter: string) =>
     return score + fullWordScore;
 }
 
-function handleWordSubmission(state: GameState) {
+function handleWordSubmission(state: GameState) :GameState {
     const newState = {...state, currentWord: ""}
     const word = state.currentWord
     if (state.foundWords.includes(word)) {
@@ -36,7 +26,7 @@ function handleWordSubmission(state: GameState) {
         return {...newState, inputError: `Woord moet minstens 1 ${state.centerLetter.toUpperCase()} bevatten.`}
     }
     if (state.words.includes(word)) {
-        return {...newState, score: calculateNewScore(state.score, word, state.centerLetter), previousScore: state.score, foundWords: [...state.foundWords, word]}
+        return {...newState, player: {...newState.player, score: calculateNewScore(state.player.score, word, state.centerLetter)}, foundWords: [...state.foundWords, word]}
     }
     return {...newState, inputError: "Onbekend woord"}
 }
@@ -44,11 +34,11 @@ function handleWordSubmission(state: GameState) {
 export const reducer: Reducer<GameState, WordAction> = (state, action) => {
     if (state === undefined) {
         let a = action as InitializeAction
-        return a.payload?.state ?? initialState
+        return a.payload?.state ?? InitialGameState
     }
     switch (action.type) {
         case "stopGame":
-            return {...initialState, wasStopped: true}
+            return {...InitialGameState, wasStopped: true}
         case "initialize":
             return {...action.payload.state, loaded: true}
         case "removeLetter":
@@ -66,8 +56,6 @@ export const reducer: Reducer<GameState, WordAction> = (state, action) => {
         case "submitWord": {
             return handleWordSubmission(state)
         }
-        case "updateScore":
-            return {...state, score: state.score + action.payload.addPoints}
         case "shuffle":
             return {...state, edgeLetters: shuffle(state.edgeLetters)}
         case "clearError":

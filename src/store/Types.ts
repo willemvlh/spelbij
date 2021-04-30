@@ -1,15 +1,22 @@
 import {Action} from "@reduxjs/toolkit";
 
 export type InitialState = { words: string[], edgeLetters: string[], centerLetter: string }
+
+export type PlayerState = {
+    name: string,
+    score: number,
+    previousScore: number
+}
+
 export type GameState = InitialState &
     {
+        player: PlayerState,
         currentWord: string,
-        score: number,
         foundWords: string[],
         loaded: boolean
         inputError: string | null,
         wasStopped: boolean,
-        previousScore: number
+        otherPlayers: PlayerState[]
     }
 
 export interface AddLetterAction extends Action {
@@ -53,6 +60,11 @@ export interface InitializeAction extends Action {
     payload: {
         state: GameState
     }
+}
+
+export interface PlayerJoinAction extends Action {
+    type: "playerJoin",
+    payload: PlayerState
 }
 
 export type WordAction =
