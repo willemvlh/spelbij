@@ -1,6 +1,6 @@
 import {Reducer} from "@reduxjs/toolkit";
 import {GameState, InitializeAction, WordAction} from "./Types";
-import {shuffle} from "lodash";
+import {shuffle, uniq} from "lodash";
 import {InitialGameState} from "../Utils";
 
 
@@ -56,11 +56,23 @@ export const reducer: Reducer<GameState, WordAction> = (state, action) => {
         case "submitWord": {
             return handleWordSubmission(state)
         }
+        case "updateScore":
+            return {...state, player: {...state.player, score: action.payload}}
         case "shuffle":
             return {...state, edgeLetters: shuffle(state.edgeLetters)}
         case "clearError":
             return {...state, inputError: null}
-
+        case "setMultiplayerGameId":
+            return {...state, multiplayer: {...state.multiplayer, gameId: action.payload}}
+        case "updateMultiplayerPlayerList":
+            return {...state, multiplayer: {...state.multiplayer, otherPlayers: action.payload.filter(pl => pl.name !== state.multiplayer.myId)}}
+        case "setPlayerId":
+            return {...state, multiplayer: {...state.multiplayer, myId: action.payload}}
+        case "updateGameFromMultiplayer":
+            let words = state.foundWords;
+            let newWords = action.payload.foundWords;
+            let uniqueFoundWords = uniq(words.concat(newWords));
+            return {...state, words: action.payload.words, edgeLetters: action.payload.edgeLetters, centerLetter: action.payload.centerLetter, foundWords: uniqueFoundWords}
         default:
             throw new Error("Unknown action: " + action["type"])
     }

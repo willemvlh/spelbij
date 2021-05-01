@@ -6,7 +6,8 @@ import FoundsWords from "../FoundWords/FoundWords";
 import Buttons from "../Buttons/Buttons";
 import Letters from "../Letters/Letters";
 import Header from "../Header/Header"
-import {getGameFromStorageOrServer} from "../../Utils";
+import {getGameFromStorageOrServer, isDevelopment} from "../../Utils";
+import MultiplayerPanel from "../MultiplayerPanel";
 
 type StateProps = { state: GameState }
 
@@ -37,8 +38,10 @@ const Grid: React.FunctionComponent<Props> = ({state, initialize}) => {
     return (
         <div id={styles.container}>
             <Header state={state}/>
+            {isDevelopment && <button onClick={() => localStorage.removeItem("gameState")}>Clear state</button>}
             <Letters edgeLetters={state.edgeLetters} centerLetter={state.centerLetter}/>
             <Buttons/>
+            <MultiplayerPanel players={state.multiplayer.otherPlayers.concat(state.player)}/>
             <FoundsWords />
         </div>
     )

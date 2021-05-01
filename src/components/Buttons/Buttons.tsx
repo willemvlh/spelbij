@@ -1,8 +1,9 @@
 import { connect, ConnectedProps } from "react-redux"
-import React from "react";
+import React, {useContext} from "react";
 import styles from "./Buttons.module.css"
 import {Backspace, FlipCameraAndroid, Send} from "@material-ui/icons";
 import {WordAction} from "../../store/Types";
+import {SocketContext} from "../App/SocketContext";
 
 const mapDispatchToProps = (dispatch: (action: WordAction) => any) => ({
     shuffle: () => dispatch({type: "shuffle"}),
@@ -14,7 +15,7 @@ const connector = connect(null, mapDispatchToProps)
 type Props = ConnectedProps<typeof connector>
 
 
-const buttons: React.FunctionComponent<Props> = ({submitWord, shuffle, backspace}) => {
+const Buttons: React.FunctionComponent<Props> = ({submitWord, shuffle, backspace}) => {
     return  <div className={styles.buttons}>
         <Backspace onClick={backspace}/>
         <Send onClick={submitWord}/>
@@ -22,4 +23,4 @@ const buttons: React.FunctionComponent<Props> = ({submitWord, shuffle, backspace
     </div>
 }
 
-export default connector(buttons)
+export default connector(Buttons)

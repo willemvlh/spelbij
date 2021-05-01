@@ -2,7 +2,7 @@ import {GameState, InitialState, PlayerState} from "./store/Types";
 import Dummy from "./dummyRequest"
 
 
-const isDevelopment = process.env.NODE_ENV === "development";
+export const isDevelopment = process.env.NODE_ENV === "development";
 export const log = (info: any) => isDevelopment && console.debug(info)
 
 const backendUrl = /*process.env.REACT_APP_LAMBDA*/ "https://k5pn0dzua9.execute-api.us-east-1.amazonaws.com/default/Spelbij-game-creator"
@@ -19,9 +19,15 @@ export const fetchGame: (() => Promise<InitialState>) = () => {
 }
 
 const initialPlayerState: PlayerState = {
-    name: "",
+    name: "Myself",
     score: 0,
     previousScore: 0
+}
+
+export const InitialMultiplayerState = {
+    gameId: "",
+    myId: "",
+    otherPlayers: []
 }
 
 export const InitialGameState: GameState = {
@@ -34,7 +40,7 @@ export const InitialGameState: GameState = {
     loaded: false,
     inputError: null,
     wasStopped: false,
-    otherPlayers: []
+    multiplayer: InitialMultiplayerState
 };
 
 export const initializeGame: ((bare: InitialState) => GameState) = (bare) => {

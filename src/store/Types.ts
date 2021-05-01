@@ -16,7 +16,11 @@ export type GameState = InitialState &
         loaded: boolean
         inputError: string | null,
         wasStopped: boolean,
-        otherPlayers: PlayerState[]
+        multiplayer: {
+            gameId: string,
+            myId: string
+            otherPlayers: PlayerState[]
+        }
     }
 
 export interface AddLetterAction extends Action {
@@ -48,11 +52,9 @@ export interface ShuffleAction extends Action {
     type: "shuffle"
 }
 
-export interface UpdateScoreAction extends Action {
+export interface SetScoreAction extends Action {
     type: "updateScore",
-    payload: {
-        addPoints: number
-    }
+    payload: number
 }
 
 export interface InitializeAction extends Action {
@@ -67,6 +69,26 @@ export interface PlayerJoinAction extends Action {
     payload: PlayerState
 }
 
+export interface SetMultiplayerGameIdAction extends Action {
+    type: "setMultiplayerGameId",
+    payload: string
+}
+
+export interface UpdateMultiplayerPlayerListAction extends Action{
+    type: "updateMultiplayerPlayerList",
+    payload: PlayerState[]
+}
+
+export interface SetPlayerIdAction extends Action{
+    type: "setPlayerId",
+    payload: string
+}
+
+export interface UpdateGameFromMultiplayerAction extends Action{
+    type: "updateGameFromMultiplayer",
+    payload: {words: string[], foundWords: string[], edgeLetters: string[], centerLetter: string}
+}
+
 export type WordAction =
     InitializeAction
     | AddLetterAction
@@ -74,6 +96,10 @@ export type WordAction =
     | RemoveLetterAction
     | ResetWordAction
     | SubmitWordAction
-    | UpdateScoreAction
+    | SetScoreAction
     | ShuffleAction
-    | StopGameAction;
+    | StopGameAction
+    | SetMultiplayerGameIdAction
+    | SetPlayerIdAction
+    | UpdateMultiplayerPlayerListAction
+    | UpdateGameFromMultiplayerAction;
