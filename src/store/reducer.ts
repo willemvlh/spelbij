@@ -73,6 +73,8 @@ export const reducer: Reducer<GameState, WordAction> = (state, action) => {
             let newWords = action.payload.foundWords;
             let uniqueFoundWords = uniq(words.concat(newWords));
             return {...state, words: action.payload.words, edgeLetters: action.payload.edgeLetters, centerLetter: action.payload.centerLetter, foundWords: uniqueFoundWords}
+        case "clearFoundWords":
+            return {...state, foundWords: []}
         default:
             throw new Error("Unknown action: " + action["type"])
     }

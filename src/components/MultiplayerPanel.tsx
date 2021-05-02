@@ -1,12 +1,15 @@
 import {PlayerState} from "../store/Types";
-import React from "react";
+import React, {useContext} from "react";
+import {sortBy} from "lodash"
+import {SocketContext} from "./App/SocketContext";
 
 const MultiplayerPanel: React.FC<{players: PlayerState[]}> = ({players}) => {
-    return <div>
+    let socket = useContext(SocketContext);
+    return socket.connected ? <div>
         <ul>
-            {players.map(pl => <li key={pl.name}>{pl.name} | {pl.score}</li>)}
+            {sortBy(players, pl => pl.score).map(pl => <li key={pl.name}>{pl.name} | {pl.score}</li>)}
         </ul>
-    </div>
+    </div> : <></>
 }
 
 export default MultiplayerPanel

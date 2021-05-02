@@ -12,7 +12,7 @@ import {
 
 if(isDevelopment) localStorage.setItem("debug", "*");
 
-export const socket = io("http://localhost:8080", {autoConnect: false})
+export const socket = io("http://spelbijmultiplayer-env.eba-6ukdgehm.us-east-1.elasticbeanstalk.com/", {autoConnect: false})
 socket.on("identification", id => {
     store.dispatch<SetPlayerIdAction>({type: "setPlayerId", payload: id})
 })

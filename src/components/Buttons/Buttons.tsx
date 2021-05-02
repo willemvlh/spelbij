@@ -1,9 +1,8 @@
 import { connect, ConnectedProps } from "react-redux"
-import React, {useContext} from "react";
+import React from "react";
 import styles from "./Buttons.module.css"
 import {Backspace, FlipCameraAndroid, Send} from "@material-ui/icons";
 import {WordAction} from "../../store/Types";
-import {SocketContext} from "../App/SocketContext";
 
 const mapDispatchToProps = (dispatch: (action: WordAction) => any) => ({
     shuffle: () => dispatch({type: "shuffle"}),

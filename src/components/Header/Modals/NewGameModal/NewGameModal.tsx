@@ -1,12 +1,10 @@
 import SBModal from "../../Modal";
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import styles from "./NewGameModal.module.css"
 import {Button, makeStyles} from "@material-ui/core";
 import {
     GameState,
     InitializeAction,
-    PlayerJoinAction,
-    PlayerState,
     SetMultiplayerGameIdAction, SetScoreAction,
     StopGameAction, UpdateMultiplayerPlayerListAction
 } from "../../../../store/Types";
@@ -14,7 +12,7 @@ import {connect, ConnectedProps} from "react-redux";
 import {fetchGame, initializeGame} from "../../../../Utils";
 import {WordListForLetter} from "../../../WordListForLetter/WordListForLetter";
 import LoadingIcon from "../../../LoadingIcon/LoadingIcon";
-import {SocketContext} from "../../../App/SocketContext";
+import MultiplayerSetupPanel from "../../../Grid/MultiplayerSetupPanel/MultplayerSetupPanel";
 
 
 type ModalProps = {
@@ -27,9 +25,6 @@ const mapStateToProps = (state: GameState) => ({
     allWords: state.words,
     foundWords: state.foundWords,
     isNewGameLoaded: state.loaded,
-    multiplayerGameId: state.multiplayer.gameId,
-    centerLetter: state.centerLetter,
-    edgeLetters: state.edgeLetters
 
 });
 const mapDispatchToProps = (dispatch: ((action: InitializeAction | StopGameAction | SetMultiplayerGameIdAction | UpdateMultiplayerPlayerListAction | SetScoreAction) => void)) => {
@@ -40,13 +35,7 @@ const mapDispatchToProps = (dispatch: ((action: InitializeAction | StopGameActio
             dispatch({type: "initialize", payload: {state: initializeGame(game)}})
         },
 
-        setMultiplayerGameId: (id: string) => {
-            dispatch({type: "setMultiplayerGameId", payload: id})
-        },
 
-        resetScore: () => {
-            dispatch({type: "updateScore", payload: 0})
-        }
     }
 }
 
@@ -59,7 +48,6 @@ const NewGameModal: React.FC<ModalProps & StateProps> = (props) => {
     const [allWords, setAllWords] = useState<string[]>([]);
     const [buttonWasClicked, setButtonWasClicked] = useState(false);
     const [gameIsLoaded, setGameIsLoaded] = useState(false);
-    const socket = useContext(SocketContext);
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -80,22 +68,7 @@ const NewGameModal: React.FC<ModalProps & StateProps> = (props) => {
         setGameIsLoaded(true)
     };
 
-    const startMultiplayer = () => {
-        socket.on("gameCreated", gameId => {
-            props.setMultiplayerGameId(gameId)
-        });
-        socket.connect();
-        socket.emit("createGame", props.edgeLetters, props.centerLetter, props.allWords, props.foundWords)
-    }
 
-    const joinMultiplayer = () => {
-        let id = prompt("ID?")
-        if (!id) return;
-        socket.connect();
-        socket.emit("joinGame", id);
-        props.resetScore();
-        props.onRequestClose();
-    }
 
     return <SBModal shouldCloseOnOverlayClick={!buttonWasClicked} isOpen={props.isOpen}
                     onRequestClose={props.onRequestClose}>
@@ -104,9 +77,7 @@ const NewGameModal: React.FC<ModalProps & StateProps> = (props) => {
                     onClick={startNewGame}>Nieuw spel laden</Button>
             <Button className={styles.button} color={"secondary"} variant={"contained"} disabled={!gameIsLoaded}
                     onClick={props.onRequestClose}>Start</Button>
-            <Button className={styles.button} onClick={startMultiplayer}>Start multiplayer</Button>
-            <Button onClick={joinMultiplayer}>Join multiplayer</Button>
-            {socket.connected && <span>{props.multiplayerGameId}</span>}
+            <MultiplayerSetupPanel onRequestClose={props.onRequestClose}/>
         </div>
         {buttonWasClicked &&
         <>

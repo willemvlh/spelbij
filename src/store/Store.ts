@@ -5,7 +5,7 @@ import {debounce} from "lodash"
 import {reducer} from "./reducer";
 import {InitialMultiplayerState} from "../Utils";
 import {Middleware} from "redux";
-import {GameState, SubmitWordAction, WordAction} from "./Types";
+import {GameState, WordAction} from "./Types";
 import {socket} from "../components/App/SocketContext"
 
 const MultiplayerMiddleware: Middleware = ({getState}) => {

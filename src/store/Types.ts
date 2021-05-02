@@ -89,6 +89,10 @@ export interface UpdateGameFromMultiplayerAction extends Action{
     payload: {words: string[], foundWords: string[], edgeLetters: string[], centerLetter: string}
 }
 
+export interface ClearFoundWords extends Action{
+    type: "clearFoundWords"
+}
+
 export type WordAction =
     InitializeAction
     | AddLetterAction
@@ -102,4 +106,5 @@ export type WordAction =
     | SetMultiplayerGameIdAction
     | SetPlayerIdAction
     | UpdateMultiplayerPlayerListAction
-    | UpdateGameFromMultiplayerAction;
+    | UpdateGameFromMultiplayerAction
+    | ClearFoundWords;
