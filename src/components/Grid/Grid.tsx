@@ -1,5 +1,5 @@
 import {connect, ConnectedProps} from "react-redux"
-import {GameState} from "../../store/Types";
+import {IGameState} from "../../store/Types";
 import styles from "./Grid.module.css";
 import React, {useEffect} from "react";
 import FoundsWords from "../FoundWords/FoundWords";
@@ -8,9 +8,9 @@ import Letters from "../Letters/Letters";
 import Header from "../Header/Header"
 import {getGameFromStorageOrServer} from "../../Utils";
 
-type StateProps = { state: GameState }
+type StateProps = { state: IGameState }
 
-const mapStateToProps: (state: GameState) => StateProps = (state) => ({state: state})
+const mapStateToProps: (state: IGameState) => StateProps = (state) => ({state: state})
 const mapDispatchToProps = (dispatch) => {
     return {
         initialize: () => {

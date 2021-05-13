@@ -1,10 +1,10 @@
 import React from "react";
-import {GameState} from "../../../store/Types";
+import {IGameState} from "../../../store/Types";
 import styles from "./Input.module.css"
 import InputError from "./InputError";
 
 type InputComponentType = {
-    state: GameState
+    state: IGameState
 }
 
 export const Input: React.FC<InputComponentType> = ({state}) => {

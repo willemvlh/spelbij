@@ -1,4 +1,4 @@
-import {GameState, InitialState} from "./store/Types";
+import {GameState, IGameState, IInitialState} from "./store/Types";
 import Dummy from "./dummyRequest"
 
 
@@ -7,7 +7,7 @@ export const log = (info: any) => isDevelopment && console.debug(info)
 
 const backendUrl = /*process.env.REACT_APP_LAMBDA*/ "https://k5pn0dzua9.execute-api.us-east-1.amazonaws.com/default/Spelbij-game-creator"
 
-export const fetchGame: (() => Promise<InitialState>) = () => {
+export const fetchGame: (() => Promise<IInitialState>) = () => {
     if(!backendUrl){
         throw new Error("Backend url must not be empty - set REACT_APP_LAMBDA env var")
     }
@@ -18,23 +18,25 @@ export const fetchGame: (() => Promise<InitialState>) = () => {
             .then(game => game)
 }
 
-export const initializeGame: ((bare: InitialState) => GameState) = (bare) => {
-    return {...bare, foundWords: [], loaded: true, score: 0, currentWord: "", inputError: null, wasStopped: false, previousScore: 0}
+function stateIsValid(state: IGameState) {
+    //compare the number of properties with those of an empty state
+    let emptyState = new GameState();
+    return Object.getOwnPropertyNames(state).length === Object.getOwnPropertyNames(emptyState).length
 }
 
-export const getGameFromStorageOrServer: (() => Promise<GameState>) = () => {
+export const getGameFromStorageOrServer: (() => Promise<IGameState>) = () => {
     //first check local storage
     const serializedState = localStorage.getItem("gameState")
     if(serializedState){
-        const state: GameState = JSON.parse(serializedState)
+        const state: IGameState = JSON.parse(serializedState)
         log("Found state in storage")
-        if(Object.keys(state).includes("message")){
+        if(!stateIsValid(state)){
             log("State is invalid. Refetching");
-            return fetchGame().then(s => initializeGame(s))
+            return fetchGame().then(s => new GameState(s))
         }
         return Promise.resolve(state)
     }
     log("Nothing in local storage, fetch from server")
     //nothing in local storage, fetch from server
-    return fetchGame().then(s => initializeGame(s))
+    return fetchGame().then(s => new GameState(s))
 }

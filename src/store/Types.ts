@@ -1,16 +1,39 @@
 import {Action} from "@reduxjs/toolkit";
 
-export type InitialState = { words: string[], edgeLetters: string[], centerLetter: string }
-export type GameState = InitialState &
-    {
-        currentWord: string,
-        score: number,
-        foundWords: string[],
-        loaded: boolean
-        inputError: string | null,
-        wasStopped: boolean,
-        previousScore: number
+export interface IInitialState {
+    words: string[],
+    edgeLetters: string[],
+    centerLetter: string
+}
+
+export interface IGameState extends IInitialState {
+    currentWord: string,
+    score: number,
+    foundWords: string[],
+    loaded: boolean
+    inputError: string | null,
+    wasStopped: boolean,
+    previousScore: number
+}
+
+export class GameState implements IGameState{
+    centerLetter: string;
+    currentWord: string = "";
+    edgeLetters: string[];
+    foundWords: string[] = [];
+    inputError: string | null = null;
+    loaded: boolean = true;
+    previousScore: number = 0;
+    score: number = 0;
+    wasStopped: boolean = false;
+    words: string[];
+
+    constructor(initial?: IInitialState) {
+        this.centerLetter = initial?.centerLetter ?? ""
+        this.edgeLetters = initial?.edgeLetters ?? []
+        this.words = initial?.words ?? []
     }
+}
 
 export interface AddLetterAction extends Action {
     type: "addLetter",
@@ -51,7 +74,7 @@ export interface UpdateScoreAction extends Action {
 export interface InitializeAction extends Action {
     type: "initialize",
     payload: {
-        state: GameState
+        state: IGameState
     }
 }
 

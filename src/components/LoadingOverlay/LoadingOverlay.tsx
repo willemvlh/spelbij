@@ -1,10 +1,10 @@
 import React from "react";
-import {GameState} from "../../store/Types";
+import {IGameState} from "../../store/Types";
 import {connect} from "react-redux";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 
 
-const mapStateToProps = (state: GameState) => ({loaded: state.loaded})
+const mapStateToProps = (state: IGameState) => ({loaded: state.loaded})
 const connector = connect(mapStateToProps)
 
 const LoadingOverlay = (props) => {

@@ -2,9 +2,9 @@ import SBModal from "../../Modal";
 import React, {useState} from "react";
 import styles from "./NewGameModal.module.css"
 import {Button, makeStyles} from "@material-ui/core";
-import {GameState, InitializeAction, StopGameAction} from "../../../../store/Types";
+import {GameState, IGameState, InitializeAction, StopGameAction} from "../../../../store/Types";
 import {connect, ConnectedProps} from "react-redux";
-import {fetchGame, initializeGame} from "../../../../Utils";
+import {fetchGame} from "../../../../Utils";
 import {WordListForLetter} from "../../../WordListForLetter/WordListForLetter";
 import LoadingIcon from "../../../LoadingIcon/LoadingIcon";
 
@@ -14,7 +14,7 @@ type ModalProps = {
     onRequestClose: () => void
 }
 
-const mapStateToProps = (state: GameState) => ({
+const mapStateToProps = (state: IGameState) => ({
     letters: state.edgeLetters.concat(state.centerLetter),
     allWords: state.words,
     foundWords: state.foundWords,
@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch: ((action: InitializeAction | StopGameActio
         startNewGame: async () => {
             dispatch({type: "stopGame"})
             const game = await fetchGame()
-            dispatch({type: "initialize", payload: {state: initializeGame(game)}})
+            dispatch({type: "initialize", payload: {state: new GameState(game)}})
         }
     }
 }

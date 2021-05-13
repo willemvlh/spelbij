@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./FoundWords.module.css"
-import {GameState} from "../../store/Types";
+import {IGameState} from "../../store/Types";
 import {connect, ConnectedProps} from "react-redux"
 import {WordListForLetter} from "../WordListForLetter/WordListForLetter";
 
-type StateProps = { state: GameState }
-const mapStateToProps: (state: GameState) => StateProps = (state) => ({state: state})
+type StateProps = { state: IGameState }
+const mapStateToProps: (state: IGameState) => StateProps = (state) => ({state: state})
 const connector = connect(mapStateToProps)
 type Props = ConnectedProps<typeof connector>
 

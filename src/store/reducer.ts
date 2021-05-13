@@ -1,8 +1,8 @@
 import {Reducer} from "@reduxjs/toolkit";
-import {GameState, InitializeAction, WordAction} from "./Types";
+import {IGameState, InitializeAction, WordAction} from "./Types";
 import {shuffle} from "lodash";
 
-const initialState: GameState = {
+const initialState: IGameState = {
     currentWord: "",
     edgeLetters: [],
     centerLetter: "",
@@ -23,7 +23,7 @@ const calculateNewScore: ((score: number, word: string, centerLetter: string) =>
     return score + fullWordScore;
 }
 
-function handleWordSubmission(state: GameState) {
+function handleWordSubmission(state: IGameState) {
     const newState = {...state, currentWord: ""}
     const word = state.currentWord
     if (state.foundWords.includes(word)) {
@@ -41,7 +41,7 @@ function handleWordSubmission(state: GameState) {
     return {...newState, inputError: "Onbekend woord"}
 }
 
-export const reducer: Reducer<GameState, WordAction> = (state, action) => {
+export const reducer: Reducer<IGameState, WordAction> = (state, action) => {
     if (state === undefined) {
         let a = action as InitializeAction
         return a.payload?.state ?? initialState

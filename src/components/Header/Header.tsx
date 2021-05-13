@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import styles from "./Header.module.css"
-import {GameState} from "../../store/Types";
+import {IGameState} from "../../store/Types";
 import {Input} from "./Input/Input";
 import {Information} from "./Information";
 
-const Header: React.FC<{ state: GameState }> = ({state}) => {
+const Header: React.FC<{ state: IGameState }> = ({state}) => {
 
     let [pointsAddedStyle, setPointsAddedStyle] = useState(styles.hidden);
     useEffect(() => {
