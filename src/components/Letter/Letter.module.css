@@ -15,6 +15,10 @@
     transition: background 0.1s
 }
 
-.cell:active{
-    background: #ccc;
+@media screen and (max-width: 340px) {
+    .cell{
+        width: 92px;
+        height: 92px;
+    }
+
 }
