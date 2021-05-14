@@ -20,7 +20,7 @@
 
 .pointsAdded{
     opacity: 0;
-    animation-name: fade-out;
+    animation-name: fade-in-out;
     animation-duration: 1s;
 }
 
@@ -39,7 +39,8 @@
     align-items: flex-end
 }
 
-@keyframes fade-out {
+
+@keyframes fade-in-out {
     0%   {opacity: 0}
     40% {opacity: 1}
     60%   {opacity: 1}

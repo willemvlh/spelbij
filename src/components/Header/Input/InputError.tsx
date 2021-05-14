@@ -10,13 +10,13 @@ type InputErrorComponentType = {
 
 const Feedback: React.FC<InputErrorComponentType> = ({error}) => {
     const dispatch = useDispatch<Dispatch<ClearErrorAction>>();
-    const clearError = () => dispatch({type: "clearError"})
     useEffect(() => {
+        const clearError = () => dispatch({type: "clearError"})
         const timeout = setTimeout(clearError, 3000);
         return function(){
             clearTimeout(timeout)
         }
-    }, [clearError])
+    })
     return <div className={styles.toast}>{error}</div>;
 }
 

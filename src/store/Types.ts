@@ -13,7 +13,7 @@ export interface IGameState extends IInitialState {
     loaded: boolean
     inputError: string | null,
     wasStopped: boolean,
-    previousScore: number
+    previousScore: number | null
 }
 
 export class GameState implements IGameState{

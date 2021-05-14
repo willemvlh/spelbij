@@ -29,7 +29,8 @@ export const getGameFromStorageOrServer: (() => Promise<IGameState>) = () => {
     //first check local storage
     const serializedState = localStorage.getItem("gameState")
     if(serializedState){
-        const state: IGameState = JSON.parse(serializedState)
+        const state: IGameState = JSON.parse(serializedState);
+        state.previousScore = null;
         log("Found state in storage")
         if(!stateIsValid(state)){
             log("State is invalid. Refetching");
