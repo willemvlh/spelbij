@@ -73,8 +73,10 @@ export const reducer: Reducer<IGameState, WordAction> = (state, action) => {
         case "clearError":
             return {...state, inputError: null}
         default:
-            // noinspection JSUnusedLocalSymbols
-            let _:never = action;
-            throw new Error("Unknown action: " + action["type"])
+            return assertUnreachable(action);
     }
+}
+
+const assertUnreachable = (action: never) => {
+    throw new Error(action);
 }
