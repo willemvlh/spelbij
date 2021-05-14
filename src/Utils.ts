@@ -1,5 +1,6 @@
 import {GameState, IGameState, IInitialState} from "./store/Types";
 import Dummy from "./dummyRequest"
+import {TypedUseSelectorHook, useSelector as useSelectorUntyped} from "react-redux";
 
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -40,3 +41,5 @@ export const getGameFromStorageOrServer: (() => Promise<IGameState>) = () => {
     //nothing in local storage, fetch from server
     return fetchGame().then(s => new GameState(s))
 }
+
+export const useSelector: TypedUseSelectorHook<IGameState> = useSelectorUntyped;

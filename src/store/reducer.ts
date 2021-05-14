@@ -72,8 +72,9 @@ export const reducer: Reducer<IGameState, WordAction> = (state, action) => {
             return {...state, edgeLetters: shuffle(state.edgeLetters)}
         case "clearError":
             return {...state, inputError: null}
-
         default:
+            // noinspection JSUnusedLocalSymbols
+            let _:never = action;
             throw new Error("Unknown action: " + action["type"])
     }
 }
