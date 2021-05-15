@@ -1,0 +1,6 @@
+.progress{
+    border-bottom: solid 2px #ccc;
+    border-radius: 2px;
+    margin-bottom: 4px;
+    transition: width 0.3s;
+}

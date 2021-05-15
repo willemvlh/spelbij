@@ -1,5 +1,6 @@
 import {GameState, IGameState, IInitialState} from "./store/Types";
 import Dummy from "./dummyRequest"
+import {TypedUseSelectorHook, useSelector as useSelectorUntyped} from "react-redux";
 
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -28,7 +29,8 @@ export const getGameFromStorageOrServer: (() => Promise<IGameState>) = () => {
     //first check local storage
     const serializedState = localStorage.getItem("gameState")
     if(serializedState){
-        const state: IGameState = JSON.parse(serializedState)
+        const state: IGameState = JSON.parse(serializedState);
+        state.previousScore = null;
         log("Found state in storage")
         if(!stateIsValid(state)){
             log("State is invalid. Refetching");
@@ -40,3 +42,14 @@ export const getGameFromStorageOrServer: (() => Promise<IGameState>) = () => {
     //nothing in local storage, fetch from server
     return fetchGame().then(s => new GameState(s))
 }
+
+export const useSelector: TypedUseSelectorHook<IGameState> = useSelectorUntyped;
+
+export const calculateScoreForWord = (word: string, centerLetter: string) => {
+    const basicScore: number = calculateBasicScoreForWord(word);
+    const centerLetterBonus = Array.from(word).filter(l => l === centerLetter).length - 1;
+    const longWordBonus = Math.max(0, word.length - 5);
+    return basicScore + centerLetterBonus + longWordBonus;
+}
+
+export const calculateBasicScoreForWord = (word: string) => word.length

@@ -1,7 +1,6 @@
-const game =  {
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
     centerLetter: "a",
-    edgeLetters: "bcdefghi".split(""),
-    words: ["hieba", "heiba", "abcd", "dace", "deca"]
+    edgeLetters: Array.from("bcdefghi"),
+    words: ["hieba", "babababa", "heiba", "abcd", "dace", "deca"]
 }
-
-export default game

@@ -1,6 +1,7 @@
 import {Reducer} from "@reduxjs/toolkit";
 import {IGameState, InitializeAction, WordAction} from "./Types";
 import {shuffle} from "lodash";
+import {calculateScoreForWord} from "../Utils";
 
 const initialState: IGameState = {
     currentWord: "",
@@ -16,11 +17,7 @@ const initialState: IGameState = {
 };
 
 const calculateNewScore: ((score: number, word: string, centerLetter: string) => number) = (score,word,centerLetter) => {
-    const basicScore = word.length;
-    const centerLetterBonus = Array.from(word).filter(l => l === centerLetter).length - 1;
-    const longWordBonus = Math.max(0, word.length - 5);
-    const fullWordScore = basicScore + centerLetterBonus + longWordBonus;
-    return score + fullWordScore;
+    return score + calculateScoreForWord(word, centerLetter);
 }
 
 function handleWordSubmission(state: IGameState) {
@@ -72,8 +69,11 @@ export const reducer: Reducer<IGameState, WordAction> = (state, action) => {
             return {...state, edgeLetters: shuffle(state.edgeLetters)}
         case "clearError":
             return {...state, inputError: null}
-
         default:
-            throw new Error("Unknown action: " + action["type"])
+            return assertUnreachable(action);
     }
+}
+
+const assertUnreachable = (action: never) => {
+    throw new Error(action);
 }

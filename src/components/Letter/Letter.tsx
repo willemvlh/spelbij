@@ -1,19 +1,18 @@
-import { connect } from "react-redux"
+import {useDispatch} from "react-redux"
 import styles from "./Letter.module.css"
 import { AddLetterAction } from "../../store/Types"
+import React from "react";
+import {Dispatch} from "@reduxjs/toolkit"
 
-const mapDispatchToProps = (dispatch: ((action: AddLetterAction) => any)) => {
-    return {
-        addLetter: (letter: string) => dispatch({ type: "addLetter", payload: letter })
-    }
+type Props = {
+    letter: string,
+    isMiddle?: boolean
+}
+const LetterComponent: React.FC<Props> = ({ letter, isMiddle }) => {
+    let dispatch = useDispatch<Dispatch<AddLetterAction>>();
+    let addLetter = letter => dispatch({type: "addLetter", payload: letter})
+    return <div onClick={() => addLetter(letter)}
+         className={`${styles.cell} ${isMiddle ? ` ${styles.middle} ` : ''}`}>{letter}</div>;
 }
 
-const LetterComponent = ({ letter, isMiddle, addLetter }: any) => {
-    const onClick = () => {
-        addLetter(letter);
-    }
-    return <div onClick={onClick}
-         className={`${styles.cell} ${isMiddle ? ` ${styles.middle} ` : styles.cell}`}>{letter}</div>;
-}
-
-export default connect(null, mapDispatchToProps)(LetterComponent)
+export default LetterComponent
