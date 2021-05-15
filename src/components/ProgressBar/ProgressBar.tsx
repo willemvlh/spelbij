@@ -7,7 +7,7 @@ type Props = {
 }
 const ProgressBar: React.FC<Props> = ({score, totalScore}) => {
     const weightedTotalScore = totalScore * 0.8; //assume nobody will ever reach 80%
-    const calculateWidth = () => (score / weightedTotalScore) * 100
+    const calculateWidth = () => Math.min(100, (score / weightedTotalScore) * 100)
     return <div className={styles.progress} style={{width: calculateWidth() + "%"}}/>
 }
 

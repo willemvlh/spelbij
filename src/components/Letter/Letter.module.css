@@ -12,7 +12,6 @@
     width: 100px;
     height: 100px;
     align-items: center;
-    transition: background 0.1s
 }
 
 @media screen and (max-width: 340px) {

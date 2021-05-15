@@ -12,7 +12,7 @@ const LetterComponent: React.FC<Props> = ({ letter, isMiddle }) => {
     let dispatch = useDispatch<Dispatch<AddLetterAction>>();
     let addLetter = letter => dispatch({type: "addLetter", payload: letter})
     return <div onClick={() => addLetter(letter)}
-         className={`${styles.cell} ${isMiddle ? ` ${styles.middle} ` : styles.cell}`}>{letter}</div>;
+         className={`${styles.cell} ${isMiddle ? ` ${styles.middle} ` : ''}`}>{letter}</div>;
 }
 
 export default LetterComponent
