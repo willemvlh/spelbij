@@ -44,3 +44,10 @@ export const getGameFromStorageOrServer: (() => Promise<IGameState>) = () => {
 }
 
 export const useSelector: TypedUseSelectorHook<IGameState> = useSelectorUntyped;
+
+export const calculateScoreForWord = (word: string, centerLetter: string) => {
+    const basicScore = word.length;
+    const centerLetterBonus = Array.from(word).filter(l => l === centerLetter).length - 1;
+    const longWordBonus = Math.max(0, word.length - 5);
+    return basicScore + centerLetterBonus + longWordBonus;
+}
