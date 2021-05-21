@@ -1,0 +1,5 @@
+[functions]
+directory = "function"
+
+[context.development.environment]
+REACT_GAME_URL = "https://k5pn0dzua9.execute-api.us-east-1.amazonaws.com/default/Spelbij-game-creator"

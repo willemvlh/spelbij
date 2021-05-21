@@ -6,7 +6,7 @@ import {TypedUseSelectorHook, useSelector as useSelectorUntyped} from "react-red
 const isDevelopment = process.env.NODE_ENV === "development";
 export const log = (info: any) => isDevelopment && console.debug(info)
 
-const backendUrl = /*process.env.REACT_APP_LAMBDA*/ "https://k5pn0dzua9.execute-api.us-east-1.amazonaws.com/default/Spelbij-game-creator"
+const backendUrl = process.env.REACT_GAME_URL
 
 export const fetchGame: (() => Promise<IInitialState>) = () => {
     if(!backendUrl){
