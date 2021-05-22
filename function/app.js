@@ -24,7 +24,7 @@ const createGame = async () => {
     return {
         centerLetter: centerLetter,
         edgeLetters: shuffle(edgeLetters),
-        words: allWords,
+        words: words,
     };
 }
 
