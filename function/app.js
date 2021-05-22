@@ -19,13 +19,7 @@ const createGame = async () => {
 
     const r = await fs.readFile(file, {encoding: "utf-8"});
     let allWords = r.split("\r\n");
-    words.push(...allWords.filter(w => w.includes(centerLetter)
-        && Array.from(w).every(letter => allLetters.includes(letter))));
-    return {
-        centerLetter: centerLetter,
-        edgeLetters: shuffle(edgeLetters),
-        words: words,
-    };
+    return {words: allWords}
 }
 
 const randomElements = (collection, number) => {
