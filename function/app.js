@@ -41,7 +41,7 @@ const randomElements = (collection, number) => {
 
 const randomElement = collection => randomElements(collection, 1)[0]
 
-exports.lambdaHandler = async (_event, _context) => {
+exports.handler = async (_event, _context) => {
     try {
         const game = await createGame();
         return {
