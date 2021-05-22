@@ -1,4 +1,4 @@
-const fs = require("fs/promises");
+const fs = require("fs").promises;
 const shuffle = require("lodash").shuffle
 const vowels = "aeiou";
 const consonants = "bcdfghjklmnprstvwz"
