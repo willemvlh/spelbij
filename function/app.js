@@ -6,7 +6,7 @@ const vowels = "aeiou";
 const consonants = "bcdfghjklmnprstvwz"
 
 const createGame = async () => {
-    const file = path.resolve(__dirname, "/function/words.txt");
+    const file = path.resolve(__dirname, './assets/words.txt');
     let s = new Set();
     let words = [];
 
@@ -17,7 +17,7 @@ const createGame = async () => {
     let edgeLetters = Array.from(s).filter(l => l !== centerLetter);
     let allLetters = edgeLetters.concat(centerLetter);
 
-    const r = await fs.readFile(file, { encoding: "utf-8" });
+    const r = await fs.readFile(file, {encoding: "utf-8"});
     let allWords = r.split("\r\n");
     words.push(...allWords.filter(w => w.includes(centerLetter)
         && Array.from(w).every(letter => allLetters.includes(letter))));
@@ -54,8 +54,12 @@ exports.handler = async (_event, _context) => {
                 "Access-Control-Allow-Origin": "*"
             }
         }
-    }
-    catch (e) {
-        return { statusCode: 500, body: e.toString() }
+    } catch (e) {
+        return {
+            statusCode: 500, body: JSON.stringify({error: e.toString()}), headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        }
     }
 }
