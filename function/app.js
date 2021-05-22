@@ -18,8 +18,14 @@ const createGame = async () => {
     let allLetters = edgeLetters.concat(centerLetter);
 
     const r = await fs.readFile(file, {encoding: "utf-8"});
-    let allWords = r.split("\r\n");
-    return {words: allWords}
+    let allWords = r.split("\n");
+    words.push(...allWords.filter(w => w.includes(centerLetter)
+        && Array.from(w).every(letter => allLetters.includes(letter))));
+    return {
+        centerLetter: centerLetter,
+        edgeLetters: shuffle(edgeLetters),
+        words: allWords,
+    };
 }
 
 const randomElements = (collection, number) => {
