@@ -1,10 +1,12 @@
 const fs = require("fs").promises;
 const shuffle = require("lodash").shuffle
+const path = require("path")
+
 const vowels = "aeiou";
 const consonants = "bcdfghjklmnprstvwz"
 
 const createGame = async () => {
-    const file = __dirname + "/words.txt";
+    const file = path.resolve(__dirname, "/function/words.txt");
     let s = new Set();
     let words = [];
 
