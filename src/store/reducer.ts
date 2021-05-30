@@ -1,5 +1,5 @@
 import {Reducer} from "@reduxjs/toolkit";
-import {IGameState, InitializeAction, WordAction} from "./Types";
+import {IGameState, WordAction} from "./Types";
 import {shuffle} from "lodash";
 import {calculateScoreForWord} from "../Utils";
 
@@ -39,10 +39,7 @@ function handleWordSubmission(state: IGameState) {
 }
 
 export const reducer: Reducer<IGameState, WordAction> = (state, action) => {
-    if (state === undefined) {
-        let a = action as InitializeAction
-        return a.payload?.state ?? initialState
-    }
+    if(state === undefined) throw new Error("please supply an initial state");
     switch (action.type) {
         case "stopGame":
             return {...initialState, wasStopped: true}
@@ -70,10 +67,6 @@ export const reducer: Reducer<IGameState, WordAction> = (state, action) => {
         case "clearError":
             return {...state, inputError: null}
         default:
-            return assertUnreachable(action);
+            return state
     }
-}
-
-const assertUnreachable = (action: never) => {
-    throw new Error(action);
 }

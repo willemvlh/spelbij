@@ -9,19 +9,19 @@ type WordListForLetterProps = {
     displayMissedWords: boolean,
     shouldSort?: boolean };
 
-export function WordListForLetter({allWords, displayMissedWords, foundWords, letter, shouldSort = true}: WordListForLetterProps) {
+export default function WordListForLetter({allWords, displayMissedWords, foundWords, letter, shouldSort = true}: WordListForLetterProps) {
     const wordsToShow = displayMissedWords ? allWords : foundWords;
     const orderedWordsToShow = shouldSort ? wordsToShow.sort() : wordsToShow;
     const calculateStyle = (word: string) => foundWords.includes(word) ? styles.foundWord : styles.missedWord
     const isEveryWordFound = allWords.length > 0 && foundWords.length === allWords.length;
-    return <div className={styles.foundWordsPart}>
-        <div className={styles.header}>
+    return <div className={styles.foundWordsPart} role={"listitem"}>
+        <h5 className={styles.header}>
             <span className={styles.letter}>{letter}</span>
             <span className={styles.letterCount}>({foundWords.length} / {allWords.length})</span>
             {isEveryWordFound &&
             <CheckCircleOutline htmlColor={"#2b9715fc"} fontSize={"small"} alignmentBaseline={"baseline"}
                                 viewBox={"-5 -5 32 32"}/>}
-        </div>
+        </h5>
 
         <div className={styles.foundWordsContainer}>
             {orderedWordsToShow.map(word =>
