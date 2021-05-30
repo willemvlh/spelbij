@@ -28,3 +28,6 @@ dummy.json
 /.idea/modules.xml
 /.idea/spelbij.iml
 /.idea/vcs.xml
+
+# Local Netlify folder
+.netlify
