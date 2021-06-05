@@ -24,7 +24,7 @@ function handleWordSubmission(state: IGameState) {
     const newState = {...state, currentWord: ""}
     const word = state.currentWord
     if (state.foundWords.includes(word)) {
-        return {...newState, inputError: "Dit woord is al gevonden"}
+        return {...newState, inputError: "Dit woord is al gevonden."}
     }
     if (word.length < 4){
         return {...newState, inputError: "Woord moet minstens 4 karakters bevatten."}
@@ -35,7 +35,7 @@ function handleWordSubmission(state: IGameState) {
     if (state.words.includes(word)) {
         return {...newState, score: calculateNewScore(state.score, word, state.centerLetter), previousScore: state.score, foundWords: [...state.foundWords, word]}
     }
-    return {...newState, inputError: "Onbekend woord"}
+    return {...newState, inputError: "Onbekend woord."}
 }
 
 export const reducer: Reducer<IGameState, WordAction> = (state, action) => {

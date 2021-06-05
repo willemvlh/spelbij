@@ -27,10 +27,16 @@
     display: flex;
     flex-wrap: wrap;
     font-family: "Noto Serif", serif;
+    align-items: center;
 }
 
 .missedWord{
     font-style: italic;
+}
+
+.hiddenWord{
+    background: #d2d2d26e;
+    height: 21.7px; /*depends on font */
 }
 
 .foundWord{}

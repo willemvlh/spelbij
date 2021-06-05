@@ -1,4 +1,4 @@
-import { render, logDOM, within } from '@testing-library/react';
+import { render, within } from '@testing-library/react';
 
 import WordListForLetter from "../components/WordListForLetter/WordListForLetter";
 
