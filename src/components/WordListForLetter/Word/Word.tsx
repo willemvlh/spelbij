@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./WordListForLetter.module.css"
-import {FoundStatus} from "./WordListForLetter";
+import styles from "./Word.module.scss"
+import {FoundStatus} from "../WordListForLetter";
 
 export const Word: React.FC<{ word: string, foundStatus: FoundStatus }> = ({word, foundStatus}) => {
     function getClassName() {

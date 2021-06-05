@@ -10,10 +10,7 @@
     font-weight: normal;
 }
 
-.word{
-    margin-right: 17px;
-    animation: fadein 0.7s;
-}
+
 
 .foundWordsPart {
     text-align: left;
@@ -30,27 +27,9 @@
     align-items: center;
 }
 
-.missedWord{
-    font-style: italic;
-}
 
-.hiddenWord{
-    background: #d2d2d26e;
-    height: 21.7px; /*depends on font */
-}
-
-.foundWord{}
 
 .letterCount {
     font-size: small;
     margin-left: 5px
-}
-
-@keyframes fadein {
-    0% {
-        opacity: 0
-    }
-    100% {
-        opacity: 1
-    }
 }

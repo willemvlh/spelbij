@@ -1,7 +1,7 @@
 import styles from "./WordListForLetter.module.css";
 import {CheckCircleOutline} from "@material-ui/icons"
 import React from "react";
-import {Word} from "./Word";
+import {Word} from "./Word/Word";
 
 type WordListForLetterProps = {
     letter: string,
