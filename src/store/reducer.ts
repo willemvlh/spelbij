@@ -1,5 +1,5 @@
 import {Reducer} from "@reduxjs/toolkit";
-import {IGameState, InitializeAction, WordAction} from "./Types";
+import {IGameState, WordAction} from "./Types";
 import {shuffle} from "lodash";
 import {calculateScoreForWord} from "../Utils";
 
@@ -24,7 +24,7 @@ function handleWordSubmission(state: IGameState) {
     const newState = {...state, currentWord: ""}
     const word = state.currentWord
     if (state.foundWords.includes(word)) {
-        return {...newState, inputError: "Dit woord is al gevonden"}
+        return {...newState, inputError: "Dit woord is al gevonden."}
     }
     if (word.length < 4){
         return {...newState, inputError: "Woord moet minstens 4 karakters bevatten."}
@@ -35,14 +35,11 @@ function handleWordSubmission(state: IGameState) {
     if (state.words.includes(word)) {
         return {...newState, score: calculateNewScore(state.score, word, state.centerLetter), previousScore: state.score, foundWords: [...state.foundWords, word]}
     }
-    return {...newState, inputError: "Onbekend woord"}
+    return {...newState, inputError: "Onbekend woord."}
 }
 
 export const reducer: Reducer<IGameState, WordAction> = (state, action) => {
-    if (state === undefined) {
-        let a = action as InitializeAction
-        return a.payload?.state ?? initialState
-    }
+    if(state === undefined) throw new Error("please supply an initial state");
     switch (action.type) {
         case "stopGame":
             return {...initialState, wasStopped: true}
@@ -70,10 +67,6 @@ export const reducer: Reducer<IGameState, WordAction> = (state, action) => {
         case "clearError":
             return {...state, inputError: null}
         default:
-            return assertUnreachable(action);
+            return state
     }
-}
-
-const assertUnreachable = (action: never) => {
-    throw new Error(action);
 }

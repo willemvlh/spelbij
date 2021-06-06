@@ -5,7 +5,7 @@ import {Button, makeStyles} from "@material-ui/core";
 import {GameState, IGameState, InitializeAction, StopGameAction} from "../../../../store/Types";
 import {connect, ConnectedProps} from "react-redux";
 import {fetchGame} from "../../../../Utils";
-import {WordListForLetter} from "../../../WordListForLetter/WordListForLetter";
+import WordListForLetter from "../../../WordListForLetter/WordListForLetter";
 import LoadingIcon from "../../../LoadingIcon/LoadingIcon";
 
 

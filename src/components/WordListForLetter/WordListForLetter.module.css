@@ -7,12 +7,10 @@
 .header{
     border-bottom: solid 1px #ddd;
     margin-bottom: 9px;
+    font-weight: normal;
 }
 
-.word{
-    margin-right: 17px;
-    animation: fadein 0.7s;
-}
+
 
 .foundWordsPart {
     text-align: left;
@@ -26,24 +24,12 @@
     display: flex;
     flex-wrap: wrap;
     font-family: "Noto Serif", serif;
+    align-items: center;
 }
 
-.missedWord{
-    font-style: italic;
-}
 
-.foundWord{}
 
 .letterCount {
     font-size: small;
     margin-left: 5px
-}
-
-@keyframes fadein {
-    0% {
-        opacity: 0
-    }
-    100% {
-        opacity: 1
-    }
 }

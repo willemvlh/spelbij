@@ -11,7 +11,7 @@ type Props = {
 const LetterComponent: React.FC<Props> = ({ letter, isMiddle }) => {
     let dispatch = useDispatch<Dispatch<AddLetterAction>>();
     let addLetter = letter => dispatch({type: "addLetter", payload: letter})
-    return <div onClick={() => addLetter(letter)}
+    return <div role={"gridcell"} onClick={() => addLetter(letter)}
          className={`${styles.cell} ${isMiddle ? ` ${styles.middle} ` : ''}`}>{letter}</div>;
 }
 
