@@ -14,3 +14,8 @@ test("does not display missed words", () => {
     const result = render(<WordListForLetter letter={"a"} foundWords={["abc"]} allWords={["abc", "acb"]} displayMissedWords={false}/>);
     expect(result.queryByText("acb")).toBeNull()
 })
+
+test("displays length for missed word", () => {
+    const result = render(<WordListForLetter letter={"a"} foundWords={["abc"]} allWords={["abc", "acbacb"]} displayMissedWords={false}/>);
+    expect(result.queryByText("6")).not.toBeNull()
+})
