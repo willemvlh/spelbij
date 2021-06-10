@@ -27,10 +27,10 @@ export const Word: React.FC<{ word: string, foundStatus: FoundStatus }> = ({word
         return word.length * 8.4 //approximately
     }
 
-    function getWord() {
+    function getWord(): string {
         switch (foundStatus) {
             case FoundStatus.Hidden:
-                return "";
+                return word.length.toString();
             default:
                 return word
         }
