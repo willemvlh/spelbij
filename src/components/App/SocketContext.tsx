@@ -12,7 +12,7 @@ import {
 
 if(isDevelopment) localStorage.setItem("debug", "*");
 
-export const socket = io("https://localhost:8080", {autoConnect: false})
+export const socket = io("https://api.welbespraakt.com", {autoConnect: false})
 socket.on("identification", id => {
     store.dispatch<SetPlayerIdAction>({type: "setPlayerId", payload: id})
 })
